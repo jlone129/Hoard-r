@@ -1,4 +1,4 @@
 class Genre < ApplicationRecord
     has_many :subgenres
-    belongs-to :video_game
+    belongs_to :video_game
 end

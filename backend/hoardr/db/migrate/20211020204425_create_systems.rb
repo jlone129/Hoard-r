@@ -6,6 +6,7 @@ class CreateSystems < ActiveRecord::Migration[6.1]
       t.string :brand
       t.date :year
       t.string :description
+      t.belongs_to :generation
 
       t.timestamps
     end

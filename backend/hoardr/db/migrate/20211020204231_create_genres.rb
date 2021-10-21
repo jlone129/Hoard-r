@@ -4,6 +4,7 @@ class CreateGenres < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :img_url
       t.string :description
+      t.belongs_to :video_game
 
       t.timestamps
     end
