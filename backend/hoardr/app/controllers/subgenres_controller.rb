@@ -1,0 +1,2 @@
+class SubgenresController < ApplicationController
+end
