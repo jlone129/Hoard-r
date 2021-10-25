@@ -1,26 +1,33 @@
 class UsersController < ApplicationController
+
+    skip_before_action :authorized, only: [:]
+
+    def index
+        @users = User.all
+
+        render json: @users, include: :reviews
+    end
     
-    def show
-        @user = User.find(params[:id])
+    def get_user
+        @user = self.current_user
+
+        render json: @user, include: :reviews
     end
 
-    def new
-        @user = User.new
+    def show
+        @user = User.find(params[:id])
+
+        render json: @user, include: :reviews
     end
 
     def create
         @user = User.new(user_params)
 
-        if @user.save
-            session[:user_id] = @user.id
-            redirect_to user_path, success: 'Account was successfully created'
+        if @user.valid?
+            render json: { user: @user }, status: :created
         else
-            render :new
+            render json: { error: 'failed to create user' }, status: :not_acceptable
         end
-    end
-
-    def edit
-        @user = User.find(params[:id])
     end
 
     def update
