@@ -1,13 +1,15 @@
 class VideoGamesController < ApplicationController
 
     def index
-        @video_games = Video_Game.all
+        @video_games = VideoGame.all
+
         render json: @video_games
     end
 
     def show
-        @video_game = Video_Game.find(params[:id])
-        render json: @video_games
+        @video_game = VideoGame.find(params[:id])
+        
+        render json: @video_game
     end
 
 end
