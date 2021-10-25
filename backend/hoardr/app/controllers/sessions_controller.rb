@@ -1,15 +1,26 @@
 class SessionsController < ApplicationController
+  sip_before_action :authorized, only:[:create]
 
   def create
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(username: user_login_params[:username])
 
-    if !!@user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect_to user_path
+    if @user && @user.authenticate(user_login_params[:password_digest])
+      @token = encode_token({ user_id: @user.id })
+      render json: { user: UserSerializer.new(@user), jwt: @token }, status: accepted
     else
-      message = "Your email/password are incorrect, please try again"
-      redirect_to login_path, notice: message
+      render json: { message: "Invalid Username and/or Password"}
     end
+  end
+
+  def destroy
+    logout!
+    render json: { status: 200, logged_out: true }
+  end
+
+  private
+
+  def user_login_params
+    params.require(:user).permit(:username, :password_digest)
   end
 
 end
