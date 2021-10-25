@@ -18,7 +18,7 @@ class App extends React.Component {
 
   state = {
     users: [],
-    messages: [],
+    reviews: [],
     currentUser: null
   }
 
@@ -69,6 +69,62 @@ class App extends React.Component {
 
   addUser = newUser => {
     this.setState({ users: [...this.state.users, newUser] })
+  }
+
+  addReview = newReview => {
+    this.setState({ reviews: [...this.state.reviews, newReview] })
+  }
+
+  removeReview = delReview => {
+    this.setState({ reviews: this.state.reviews.filter(review => review.id !== delReview.id) })
+  }
+
+  editReview = editedReview => {
+    let newReviews = this.state.reviews.map( review => {
+      if(review.id === editedReview.id){
+        return editedReview
+      } else {
+        return review
+      }
+    })
+    this.setState({ reviews: newReviews })
+  }
+
+  removeUser = delUser => {
+    this.setState({ users: this.state.users.filter(user => user.id !== delUser.id)})
+  }
+
+  render() {
+    const { addUser, addReview } = this
+    return (
+      <Router>
+        <div>
+          <ul className="navbar">
+            <li className="homepage">
+              <Link to="/" >Home</Link>
+            </li>
+            {this.state.currentUser ?
+            <li className="logout-link" onClick={this.handleLogout}>
+              <Link to="/login">Logout</Link>
+            </li>
+            :
+            <li className="login-link">
+              <Link to="/login">Login</Link>
+            </li>
+            }
+          </ul>
+
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+            <Route exact path="login">
+              <Login setCurrentUser={this.setCurrentUser}/>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    )
   }
 
 }
