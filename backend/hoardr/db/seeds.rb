@@ -15,7 +15,7 @@ Generation.delete_all
 Subgenre.delete_all
 
 users = User.create([
-    { username: "TrashyChan", img_url: "https://i1.sndcdn.com/avatars-qoRmQMd3rzqQnesT-gY6fFw-t240x240.jpg", password_digest: "Password1", email: "trash@sum.com", birthdate: 27.years.ago }
+    { username: "TrashyChan", img_url: "https://i1.sndcdn.com/avatars-qoRmQMd3rzqQnesT-gY6fFw-t240x240.jpg", password: "Password1", email: "trash@sum.com", birthdate: 27.years.ago }
 ])
 
 Generation.create([

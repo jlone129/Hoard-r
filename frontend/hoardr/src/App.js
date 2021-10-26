@@ -1,5 +1,5 @@
 import React from 'react'
-import Homepage from './components/homepage/homepage.js'
+import Homepage from './components/homepage/homepage'
 import Login from './components/login/login.js'
 import Profile from './components/profile/profile.js'
 import './App.css'
@@ -123,7 +123,7 @@ class App extends React.Component {
             <Route exact path="/">
               <Homepage />
             </Route>
-            <Route exact path="/login">
+            <Route exact path="login">
               <Login setCurrentUser={this.setCurrentUser}/>
             </Route>
               <Profile user={this.state.currentUser} />

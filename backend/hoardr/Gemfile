@@ -59,3 +59,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Easy creation of a serializer for any model
 gem 'active_model_serializers'
+
+# Provides support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications
+gem 'rack-cors'
