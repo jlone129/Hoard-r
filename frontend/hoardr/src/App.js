@@ -10,9 +10,9 @@ import {
   Redirect
 } from "react-router-dom";
 
-const urlUsers = 'http://localhost:3000/users'
-const urlReviews = 'http://localhost:3000/reviews'
-const urlLogout = 'http://localhost:3000/logout'
+const urlUsers = `http://localhost:3000/users/`
+const urlReviews = `http://localhost:3000/reviews/`
+const urlLogout = `http://localhost:3000/logout`
 
 class App extends React.Component {
 
@@ -23,6 +23,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+
     if(localStorage.token){
       fetch('http://localhost:3000/user', {
         headers: {
@@ -37,9 +38,9 @@ class App extends React.Component {
       fetch(urlReviews)
     ])
       .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-      .then(([users, messages]) => this.setState({
+      .then(([users, reviews]) => this.setState({
         users: users,
-        messages: messages
+        reviews: reviews
       }))
   }
 
@@ -95,7 +96,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { addUser, addReview } = this
+    // const { addUser, addReview } = this
     return (
       <Router>
         <div>

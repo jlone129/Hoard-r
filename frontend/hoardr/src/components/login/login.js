@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Homepage from "../homepage/homepage";
 
 const url = "http://localhost:3000/login"
 class Login extends Component {
