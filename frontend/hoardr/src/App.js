@@ -1,6 +1,7 @@
 import React from 'react'
-import Homepage from './components/homepage/homepage'
-import Login from './components/login/login'
+import Homepage from './components/homepage/homepage.js'
+import Login from './components/login/login.js'
+import Profile from './components/profile/profile.js'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -25,7 +26,7 @@ class App extends React.Component {
   componentDidMount() {
 
     if(localStorage.token){
-      fetch('http://localhost:3000/user', {
+      fetch(urlUsers, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }
@@ -113,14 +114,20 @@ class App extends React.Component {
               <Link to="/login">Login</Link>
             </li>
             }
+            <li className="profile">
+              <Link to="/profile">Profile</Link>
+            </li>
           </ul>
 
           <Switch>
             <Route exact path="/">
               <Homepage />
             </Route>
-            <Route exact path="login">
+            <Route exact path="/login">
               <Login setCurrentUser={this.setCurrentUser}/>
+            </Route>
+              <Profile user={this.state.currentUser} />
+            <Route exact path="/profile">
             </Route>
           </Switch>
         </div>

@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
         JWT.encode(payload, secret_key, 'HS256')
     end
 
+    def auth_header
+        request.headers["Authorization"]
+    end
+
     def decoded_token
         if auth_header()
             token = auth_header.split(" ")[1]
@@ -17,6 +21,7 @@ class ApplicationController < ActionController::Base
             rescue JWT::DecodeError
                 nil
             end
+        end
     end
 
     def current_user

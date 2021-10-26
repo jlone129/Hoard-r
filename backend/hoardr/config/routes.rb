@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'sessions#home'
   
-  resources :video_games, :users, :user_video_games, :generations, :systems, :genres, :subgenres
+  resources :video_games, :users, :user_video_games, :generations, :systems, :genres, :subgenres, :reviews
 
   get '/login', to: 'sessions#login'
   post '/login', to: 'sessions#create'
