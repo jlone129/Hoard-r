@@ -6,7 +6,7 @@ class Login extends Component {
     constructor(){
         super()
         this.state = {
-            name: "",
+            username: "",
             password: "",
             loggedIn: false,
             currentUser: "",
@@ -22,9 +22,9 @@ class Login extends Component {
         e.preventDefault()
         e.target.reset()
 
-        const {name, password} = this.state
+        const {username, password} = this.state
 
-        const user = {name, password}
+        const user = {username, password}
 
         fetch(url, {
             method: "POST",

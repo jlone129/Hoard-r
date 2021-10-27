@@ -62,3 +62,5 @@ gem 'active_model_serializers'
 
 # Provides support for Cross-Origin Resource Sharing (CORS) for Rack compatible web applications
 gem 'rack-cors'
+
+gem "jwt"

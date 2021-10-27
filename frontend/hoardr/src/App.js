@@ -26,7 +26,7 @@ class App extends React.Component {
   componentDidMount() {
 
     if(localStorage.token){
-      fetch(`http://localhost:3000/user`, {
+      fetch('http://localhost:3000/user', {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :authorized
+    skip_before_action :verify_authenticity_token
 
     def encode(payload)
         JWT.encode(payload, "anything", 'HS256')
