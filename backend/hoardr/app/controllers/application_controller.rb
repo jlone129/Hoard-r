@@ -1,12 +1,8 @@
 class ApplicationController < ActionController::Base
     before_action :authorized
-    
-    def secret_key
-        "anything"
-    end
 
     def encode(payload)
-        JWT.encode(payload, secret_key, 'HS256')
+        JWT.encode(payload, "anything", 'HS256')
     end
 
     def auth_header

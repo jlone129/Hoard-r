@@ -26,7 +26,7 @@ class App extends React.Component {
   componentDidMount() {
 
     if(localStorage.token){
-      fetch(urlUsers, {
+      fetch(`http://localhost:3000/user`, {
         headers: {
           "Authorization": `Bearer ${localStorage.token}`
         }
@@ -123,7 +123,7 @@ class App extends React.Component {
             <Route exact path="/">
               <Homepage />
             </Route>
-            <Route exact path="login">
+            <Route exact path="/login">
               <Login setCurrentUser={this.setCurrentUser}/>
             </Route>
               <Profile user={this.state.currentUser} />

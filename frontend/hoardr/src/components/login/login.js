@@ -57,9 +57,9 @@ class Login extends Component {
                     <div className="inline fields">
                         <h3>Login Page</h3>
                         <label htmlFor="username"><p>Username</p></label>
-                        <input type="text" id="username" placeholder="John Doe" name="username" onChange={handleChange} />
+                        <input type="text" id="username" placeholder="Username" name="username" onChange={handleChange} />
                         <label htmlFor="password"><p>Password</p></label>
-                        <input type="password" id="password" placeholder="V1d30G@me$" name="password" onChange={handleChange} />
+                        <input type="password" id="password" placeholder="Password" name="password" onChange={handleChange} />
                         <button type="submit">Login</button>
                         <a href="/registration">First Time User</a>
                     </div>

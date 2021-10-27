@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   
   resources :video_games, :users, :user_video_games, :generations, :systems, :genres, :subgenres, :reviews
 
-  get '/login', to: 'sessions#login'
+  get '/logged_in', to: 'sessions#logged_in?'
   post '/login', to: 'sessions#create'
-  post '/logout', to: 'sessions#destroy'
-  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
+  get '/profile', to: 'users#profile'
+  get '/user', to: 'user#get_user'
 
 end
