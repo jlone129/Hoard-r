@@ -55,7 +55,7 @@ class Login extends Component {
             <div className="login">
                 <form className="login-form" onSubmit={handleLogin}>
                     <div className="inline fields">
-                        <h3>Login Page</h3>
+                        <h1>Login Page</h1>
                         <label htmlFor="username"><p>Username</p></label>
                         <input type="text" id="username" placeholder="Username" name="username" onChange={handleChange} />
                         <label htmlFor="password"><p>Password</p></label>
