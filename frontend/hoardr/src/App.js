@@ -14,6 +14,7 @@ import {
 
 const urlUsers = `http://localhost:3000/users/`
 const urlReviews = `http://localhost:3000/reviews/`
+const urlVideoGames = `http://localhost:3000/video_games/`
 const urlLogout = `http://localhost:3000/logout`
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
   state = {
     users: [],
     reviews: [],
+    videoGames: [],
     currentUser: null
   }
 
@@ -37,12 +39,14 @@ class App extends React.Component {
     }
     Promise.all([
       fetch(urlUsers),
-      fetch(urlReviews)
+      fetch(urlReviews),
+      fetch(urlVideoGames)
     ])
-      .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
-      .then(([users, reviews]) => this.setState({
+      .then(([res1, res2, res3]) => Promise.all([res1.json(), res2.json(), res3.json()]))
+      .then(([users, reviews, videoGames]) => this.setState({
         users: users,
-        reviews: reviews
+        reviews: reviews,
+        videoGames: videoGames
       }))
   }
 
@@ -110,6 +114,9 @@ class App extends React.Component {
             <li className="video_game_index">
               <Link to="/index">Video Games</Link>
             </li>
+            <li className="profile">
+              <Link to="/profile">Profile</Link>
+            </li>
             {this.state.currentUser ?
             <li className="logout-link" onClick={this.handleLogout}>
               <Link to="/login">Logout</Link>
@@ -119,9 +126,6 @@ class App extends React.Component {
               <Link to="/login">Login</Link>
             </li>
             }
-            <li className="profile">
-              <Link to="/profile">Profile</Link>
-            </li>
           </ul>
 
           <Switch>
@@ -129,13 +133,13 @@ class App extends React.Component {
               <Homepage />
             </Route>
             <Route exact path="/index">
-              <Index />
-            </Route>
-            <Route exact path="/login">
-              <Login setCurrentUser={this.setCurrentUser}/>
+              <Index videoGames={this.state.videoGames} />
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} />
+            </Route>
+            <Route exact path="/login">
+              <Login setCurrentUser={this.setCurrentUser}/>
             </Route>
           </Switch>
         </div>
