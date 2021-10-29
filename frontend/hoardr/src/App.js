@@ -4,6 +4,7 @@ import Login from './components/Login/login.js'
 import Profile from './components/Profile/profile.js'
 import System from './components/System/system.js'
 import Generation from './components/Generation/Generation'
+import Genre from './components/Genre/Genre'
 import Index from './components/Index/index.js'
 import './App.css'
 import {
@@ -53,15 +54,19 @@ class App extends React.Component {
       fetch(urlReviews),
       fetch(urlVideoGames),
       fetch(urlSystems),
-      fetch(urlGenerations)
+      fetch(urlGenerations),
+      fetch(urlGenres),
+      fetch(urlSubgenres)
     ])
-      .then(([res1, res2, res3, res4, res5]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()]))
-      .then(([users, reviews, videoGames, systems, generations]) => this.setState({
+      .then(([res1, res2, res3, res4, res5, res6, res7]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json(), res7.json()]))
+      .then(([users, reviews, videoGames, systems, generations, genres, subgenres]) => this.setState({
         users: users,
         reviews: reviews,
         videoGames: videoGames,
         systems: systems,
-        generations: generations
+        generations: generations,
+        genres: genres,
+        subgenres: subgenres
       }))
   }
 
@@ -135,6 +140,9 @@ class App extends React.Component {
             <li className="generation">
               <Link to="/generation">Generations</Link>
             </li>
+            <li className="genre">
+              <Link to="/genre">Genres</Link>
+            </li>
             <li className="profile">
               <Link to="/profile">Profile</Link>
             </li>
@@ -160,7 +168,10 @@ class App extends React.Component {
               {this.state.systems.map(system => <System system={system} />)}
             </Route>
             <Route exact path="/generation">
-            {this.state.generations.map(gen => <Generation gen={gen} />)}
+              {this.state.generations.map(gen => <Generation gen={gen} />)}
+            </Route>
+            <Route exact path="/genre">
+              {this.state.genres.map(genre => <Genre genre={genre} />)}
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} />
