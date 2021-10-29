@@ -1,15 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
 
+class Genre extends Component {
+  
+  render() {
+    const { genre } = this.props
+    return (
+      <div>
+        <h1>Genres</h1>
+        <div className="genres">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Genre-Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src={genre.img_url} /></td>
+                <td>{genre.name}</td>
+                <td>{genre.description}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )
+  }
+}
 
-const Genre = () => (
-  <div>
-    Genre Component
-  </div>
-);
-
-Genre.propTypes = {};
-
-Genre.defaultProps = {};
-
-export default Genre;
+export default withRouter(Genre);
