@@ -2,6 +2,7 @@ import React from 'react'
 import Homepage from './components/homepage/homepage'
 import Login from './components/login/login.js'
 import Profile from './components/profile/profile.js'
+import System from './components/system/system.js'
 import Index from './components/index/index.js'
 import './App.css'
 import {
@@ -15,6 +16,11 @@ import {
 const urlUsers = `http://localhost:3000/users/`
 const urlReviews = `http://localhost:3000/reviews/`
 const urlVideoGames = `http://localhost:3000/video_games/`
+const urlUserVideoGames = `http://localhost:3000/user_video_games/`
+const urlSystems = `http://localhost:3000/systems/`
+const urlGenerations = `http://localhost:3000/generations/`
+const urlGenres = `http://localhost:3000/genres/`
+const urlSubgenres = `http://localhost:3000/subgenres/`
 const urlLogout = `http://localhost:3000/logout`
 
 class App extends React.Component {
@@ -23,6 +29,10 @@ class App extends React.Component {
     users: [],
     reviews: [],
     videoGames: [],
+    systems: [],
+    generations: [],
+    genres: [],
+    subgenres: [],
     currentUser: null
   }
 
@@ -40,13 +50,16 @@ class App extends React.Component {
     Promise.all([
       fetch(urlUsers),
       fetch(urlReviews),
-      fetch(urlVideoGames)
+      fetch(urlVideoGames),
+      fetch(urlSystems)
+
     ])
-      .then(([res1, res2, res3]) => Promise.all([res1.json(), res2.json(), res3.json()]))
-      .then(([users, reviews, videoGames]) => this.setState({
+      .then(([res1, res2, res3, res4]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]))
+      .then(([users, reviews, videoGames, systems]) => this.setState({
         users: users,
         reviews: reviews,
-        videoGames: videoGames
+        videoGames: videoGames,
+        systems: systems
       }))
   }
 
@@ -114,6 +127,9 @@ class App extends React.Component {
             <li className="video_game_index">
               <Link to="/index">Video Games</Link>
             </li>
+            <li className="system">
+              <Link to="/system">Systems</Link>
+            </li>
             <li className="profile">
               <Link to="/profile">Profile</Link>
             </li>
@@ -134,6 +150,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/index">
               {this.state.videoGames.map(videoGame => <Index videoGame={videoGame} />)}
+            </Route>
+            <Route exact path="/system">
+              {this.state.systems.map(system => <System system={system} />)}
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} />

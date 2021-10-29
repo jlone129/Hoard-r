@@ -1,15 +1,23 @@
 class UserVideoGamesController < ApplicationController
 
+    skip_before_action :authorized
+
     def index
         @user_video_games = User_Video_Game.all
+
+        render json: @user_video_games
     end
 
     def show
         @user_video_game = User_Video_Game.find(params[:id])
+    
+        render json: @user_video_game
     end
 
     def new
         @user_video_game = User_Video_Game.new
+
+        render json: @user_video_game
     end
 
     def create

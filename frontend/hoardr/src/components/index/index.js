@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 
 class Index extends Component {
     render() {
-        console.log(this.props, "Hope I can see props")
         const { videoGame } = this.props
         return (
             <div>
