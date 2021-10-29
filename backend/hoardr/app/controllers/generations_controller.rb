@@ -4,10 +4,14 @@ class GenerationsController < ApplicationController
     
     def index
         @generations = Generation.all
+
+        render json: @generations
     end
 
     def show
         @generation = Generation.find(params[:id])
+
+        render json: @generation
     end
 
 end

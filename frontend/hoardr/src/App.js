@@ -3,6 +3,7 @@ import Homepage from './components/Homepage/homepage'
 import Login from './components/Login/login.js'
 import Profile from './components/Profile/profile.js'
 import System from './components/System/system.js'
+import Generation from './components/Generation/Generation'
 import Index from './components/Index/index.js'
 import './App.css'
 import {
@@ -51,15 +52,16 @@ class App extends React.Component {
       fetch(urlUsers),
       fetch(urlReviews),
       fetch(urlVideoGames),
-      fetch(urlSystems)
-
+      fetch(urlSystems),
+      fetch(urlGenerations)
     ])
-      .then(([res1, res2, res3, res4]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json()]))
-      .then(([users, reviews, videoGames, systems]) => this.setState({
+      .then(([res1, res2, res3, res4, res5]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()]))
+      .then(([users, reviews, videoGames, systems, generations]) => this.setState({
         users: users,
         reviews: reviews,
         videoGames: videoGames,
-        systems: systems
+        systems: systems,
+        generations: generations
       }))
   }
 
@@ -130,6 +132,9 @@ class App extends React.Component {
             <li className="system">
               <Link to="/system">Systems</Link>
             </li>
+            <li className="generation">
+              <Link to="/generation">Generations</Link>
+            </li>
             <li className="profile">
               <Link to="/profile">Profile</Link>
             </li>
@@ -153,6 +158,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/system">
               {this.state.systems.map(system => <System system={system} />)}
+            </Route>
+            <Route exact path="/generation">
+            {this.state.generations.map(gen => <Generation gen={gen} />)}
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} />
