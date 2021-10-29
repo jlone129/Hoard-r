@@ -11,18 +11,22 @@ class System extends Component {
                     <h1>Systems</h1>
                     <table>
                         <thead>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Brand</th>
-                            <th>Year</th>
-                            <th>Description</th>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Brand</th>
+                                <th>Year</th>
+                                <th>Description</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <td><img src={system.img_url}/></td>
-                            <td>{system.name}</td>
-                            <td>{system.brand}</td>
-                            <td>{system.year}</td>
-                            <td>{system.description}</td>
+                            <tr>
+                                <td><img src={system.img_url}/></td>
+                                <td>{system.name}</td>
+                                <td>{system.brand}</td>
+                                <td>{system.year}</td>
+                                <td>{system.description}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -40,18 +40,22 @@ class Profile extends Component {
                             <h1>{user.name} Reviews</h1>
                             <table>
                                 <thead>
-                                    <th>Reviewer</th>
-                                    <th>Video Game</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Stars</th>
+                                    <tr>
+                                        <th>Reviewer</th>
+                                        <th>Video Game</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Stars</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <td>{user.username}</td>
-                                    <td>Example</td>
-                                    <td>Example</td>
-                                    <td>Example</td>
-                                    <td>Example</td>
+                                    <tr>
+                                        <td>{user.username}</td>
+                                        <td>Example</td>
+                                        <td>Example</td>
+                                        <td>Example</td>
+                                        <td>Example</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
