@@ -1,9 +1,9 @@
 import React from 'react'
-import Homepage from './components/homepage/homepage'
-import Login from './components/login/login.js'
-import Profile from './components/profile/profile.js'
-import System from './components/system/system.js'
-import Index from './components/index/index.js'
+import Homepage from './components/Homepage/homepage'
+import Login from './components/Login/login.js'
+import Profile from './components/Profile/profile.js'
+import System from './components/System/system.js'
+import Index from './components/Index/index.js'
 import './App.css'
 import {
   BrowserRouter as Router,
