@@ -133,7 +133,7 @@ class App extends React.Component {
               <Homepage />
             </Route>
             <Route exact path="/index">
-              <Index videoGames={this.state.videoGames} />
+              {this.state.videoGames.map(videoGame => <Index videoGame={videoGame} />)}
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} />
