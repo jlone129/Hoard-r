@@ -6,6 +6,7 @@ import System from './components/System/system.js'
 import Generation from './components/Generation/Generation'
 import Genre from './components/Genre/Genre'
 import Index from './components/Index/index.js'
+import Subgenre from './components/Subgenre/Subgenre'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -143,6 +144,9 @@ class App extends React.Component {
             <li className="genre">
               <Link to="/genre">Genres</Link>
             </li>
+            <li className="subgenre">
+              <Link to="/subgenre">Subgenre</Link>
+            </li>
             <li className="profile">
               <Link to="/profile">Profile</Link>
             </li>
@@ -172,6 +176,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/genre">
               {this.state.genres.map(genre => <Genre genre={genre} />)}
+            </Route>
+            <Route exact path="/subgenre">
+              {this.state.subgenres.map(subgenre => <Subgenre subgenre={subgenre} />)}
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} />
