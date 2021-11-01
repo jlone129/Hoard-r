@@ -6,7 +6,7 @@ class Subgenre extends Component {
     const { subgenre } = this.props
     return (
       <div>
-        <h1>Genres</h1>
+        <h1>Subgenres</h1>
         <div className="genres">
           <table>
             <thead>
