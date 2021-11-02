@@ -9,18 +9,24 @@ class Index extends Component {
         return (
             <div>
                 <h1>Video Game Index</h1>
-                <div className="gameArt">
-                    <img src={videoGame.img_url} />
-                </div>
-                <div className="gameTitle">
-                    <h3>{videoGame.title}</h3>
-                </div>
-                <div className="gameSystem">
-                    <h4>Example</h4>
-                </div>
-                <div className="gameGenre">
-                    <h4>Example</h4>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Box Art</th>
+                            <th>Title</th>
+                            <th>System</th>
+                            <th>Genre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src={videoGame.img_url} alt={videoGame.title}/></td>
+                            <td>{videoGame.title}</td>
+                            <td>{videoGame.system.name}</td>
+                            <td>{videoGame.genre.name}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         )
     }

@@ -17,15 +17,17 @@ class System extends Component {
                                 <th>Brand</th>
                                 <th>Year</th>
                                 <th>Description</th>
+                                <th>Generation</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><img src={system.img_url}/></td>
+                                <td><img src={system.img_url} alt={system.name}/></td>
                                 <td>{system.name}</td>
                                 <td>{system.brand}</td>
                                 <td>{system.year}</td>
                                 <td>{system.description}</td>
+                                <td>{system.generation.name}</td>
                             </tr>
                         </tbody>
                     </table>

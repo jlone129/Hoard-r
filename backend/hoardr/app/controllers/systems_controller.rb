@@ -5,13 +5,13 @@ class SystemsController < ApplicationController
     def index
         @systems = System.all
 
-        render json: @systems
+        render json: @systems, include: :generation
     end
 
     def show
         @system = System.find(params[:id])
 
-        render json: @system
+        render json: @system, include: :generation
     end
 
 end
