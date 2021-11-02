@@ -7,6 +7,7 @@ import Generation from './components/Generation/Generation'
 import Genre from './components/Genre/Genre'
 import Index from './components/Index/index.js'
 import Subgenre from './components/Subgenre/Subgenre'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import {
   BrowserRouter as Router,

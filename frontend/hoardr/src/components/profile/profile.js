@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import Image from 'react-bootstrap/Image';
 
 class Profile extends Component {
 
@@ -17,9 +18,9 @@ class Profile extends Component {
             <div className="profile-page">
                 {user?
                     <div className="profile">
-                        <div className="profile_pic">
+                        <div className="">
                             {user.img_url?
-                                <img src={user.img_url} alt={user.name} />
+                                <Image src={user.img_url} alt={user.name} roundedCircle />
                             :
                                 <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/5669fc87-38f8-48cd-9a9a-7fc1544b75e8-profile_image-300x300.png" alt="Default Picture" />
                             }
