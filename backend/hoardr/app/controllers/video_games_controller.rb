@@ -5,13 +5,13 @@ class VideoGamesController < ApplicationController
     def index
         @video_games = VideoGame.all
 
-        render json: @video_games
+        render json: @video_games, include: [:system, :genre]
     end
 
     def show
         @video_game = VideoGame.find(params[:id])
         
-        render json: @video_game
+        render json: @video_game, include: [:system, :genre]
     end
 
 end

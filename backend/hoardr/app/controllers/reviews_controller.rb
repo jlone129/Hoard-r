@@ -5,13 +5,13 @@ class ReviewsController < ApplicationController
     def index
         @reviews = Review.all
 
-        render json: @reviews
+        render json: @reviews, include: [:user, :video_game]
     end
 
     def show
         @review = Review.find(params[:id])
 
-        render json: @review
+        render json: @review, include: [:user, :video_game]
     end
 
     def create

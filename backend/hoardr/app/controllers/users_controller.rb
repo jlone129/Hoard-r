@@ -5,13 +5,13 @@ class UsersController < ApplicationController
     def index
         @users = User.all
 
-        render json: @users
+        render json: @users, include: [:user_video_game, :review, :video_game]
     end
     
     def get_user
         @user = self.current_user
 
-        render json: @user
+        render json: @user, include: [:user_video_game, :review, :video_game]
     end
 
     def show

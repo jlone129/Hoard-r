@@ -36,6 +36,7 @@ class App extends React.Component {
     generations: [],
     genres: [],
     subgenres: [],
+    userVideoGames: [],
     currentUser: null
   }
 
@@ -57,7 +58,8 @@ class App extends React.Component {
       fetch(urlSystems),
       fetch(urlGenerations),
       fetch(urlGenres),
-      fetch(urlSubgenres)
+      fetch(urlSubgenres),
+      fetch(urlUserVideoGames)
     ])
       .then(([res1, res2, res3, res4, res5, res6, res7]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json(), res7.json()]))
       .then(([users, reviews, videoGames, systems, generations, genres, subgenres]) => this.setState({
@@ -124,6 +126,7 @@ class App extends React.Component {
 
   render() {
     // const { addUser, addReview } = this
+    const { reviews, videoGames } = this.state
     return (
       <Router>
         <div>
@@ -145,7 +148,7 @@ class App extends React.Component {
               <Link to="/genre">Genres</Link>
             </li>
             <li className="subgenre">
-              <Link to="/subgenre">Subgenre</Link>
+              <Link to="/subgenre">Subgenres</Link>
             </li>
             <li className="profile">
               <Link to="/profile">Profile</Link>
@@ -166,7 +169,7 @@ class App extends React.Component {
               <Homepage />
             </Route>
             <Route exact path="/index">
-              {this.state.videoGames.map(videoGame => <Index videoGame={videoGame} />)}
+              {videoGames.map(videoGame => <Index videoGame={videoGame} />)}
             </Route>
             <Route exact path="/system">
               {this.state.systems.map(system => <System system={system} />)}
@@ -181,7 +184,7 @@ class App extends React.Component {
               {this.state.subgenres.map(subgenre => <Subgenre subgenre={subgenre} />)}
             </Route>
             <Route exact path="/profile">
-              <Profile user={this.state.currentUser} />
+              <Profile user={this.state.currentUser} reviews={reviews} videoGames={videoGames} />
             </Route>
             <Route exact path="/login">
               <Login setCurrentUser={this.setCurrentUser}/>
