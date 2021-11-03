@@ -1,4 +1,5 @@
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from './components/Homepage/homepage'
 import Login from './components/Login/login.js'
 import Profile from './components/Profile/profile.js'
@@ -7,7 +8,7 @@ import Generation from './components/Generation/Generation'
 import Genre from './components/Genre/Genre'
 import Index from './components/Index/index.js'
 import Subgenre from './components/Subgenre/Subgenre'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {Navbar, Container, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -127,43 +128,47 @@ class App extends React.Component {
 
   render() {
     // const { addUser, addReview } = this
-    const { reviews, videoGames } = this.state
+    const { reviews, videoGames, currentUser } = this.state
     return (
       <Router>
         <div>
-          <h1>Hoard-r</h1>
-          <ul className="navbar">
-            <li className="homepage">
-              <Link to="/" >Home</Link>
-            </li>
-            <li className="video_game_index">
-              <Link to="/index">Video Games</Link>
-            </li>
-            <li className="system">
-              <Link to="/system">Systems</Link>
-            </li>
-            <li className="generation">
-              <Link to="/generation">Generations</Link>
-            </li>
-            <li className="genre">
-              <Link to="/genre">Genres</Link>
-            </li>
-            <li className="subgenre">
-              <Link to="/subgenre">Subgenres</Link>
-            </li>
-            <li className="profile">
-              <Link to="/profile">Profile</Link>
-            </li>
-            {this.state.currentUser ?
-            <li className="logout-link" onClick={this.handleLogout}>
-              <Link to="/login">Logout</Link>
-            </li>
-            :
-            <li className="login-link">
-              <Link to="/login">Login</Link>
-            </li>
-            }
-          </ul>
+          <Navbar bg="dark" variant="dark">
+            <Container>
+              <Navbar.Brand href="/home">Hoard-r</Navbar.Brand>
+                <Nav className="me-auto">
+                  <NavDropdown title="Video Games" id="navbarScrollingDropdown">
+                    <NavDropdown.Item href="/index">Video Game Index</NavDropdown.Item>
+                    <NavDropdown.Item href="/genre">Genres</NavDropdown.Item>
+                    <NavDropdown.Item href="/subgenre">Subgenres</NavDropdown.Item>
+                  </NavDropdown>
+                  <NavDropdown title="System" id="navbarScrollingDropdown">
+                    <NavDropdown.Item href="/generation">Generation</NavDropdown.Item>
+                    <NavDropdown.Item href="/system">System</NavDropdown.Item>
+                  </NavDropdown>
+              </Nav>
+              <Form className="d-flex" id="search-bar">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-success">Search</Button>
+              </Form>
+              <Nav>
+                <NavDropdown title="User Menu" id="input-group-dropdown-2" align="end">
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  <span onClick={this.handleLogout}>
+                    {currentUser ?
+                      <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
+                    :
+                      <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                    }
+                  </span>
+                </NavDropdown>
+              </Nav>
+            </Container>
+          </Navbar>
 
           <Switch>
             <Route exact path="/">
