@@ -19,11 +19,11 @@ class Profile extends Component {
             <div className="profile-page">
                 {user?
                     <div className="profile">
-                        <div className="">
+                        <div className="profile-pic">
                             {user.img_url?
                                 <Image src={user.img_url} alt={user.name} thumbnail />
                             :
-                                <Image src="https://static-cdn.jtvnw.net/jtv_user_pictures/5669fc87-38f8-48cd-9a9a-7fc1544b75e8-profile_image-300x300.png" alt="Default Picture" rounded />
+                                <Image src="https://static-cdn.jtvnw.net/jtv_user_pictures/5669fc87-38f8-48cd-9a9a-7fc1544b75e8-profile_image-300x300.png" alt="Default Picture" thumbnail />
                             }
                         </div>
                         <div className="username">
@@ -45,17 +45,19 @@ class Profile extends Component {
                                         <th>System</th>
                                         <th>Genre</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                     {videoGames.map(function (videoGame) { 
                                             return ([
-                                            <td><Image src={videoGame.img_url} alt={videoGame.title} fluid /></td>,
+                                            <td className="box-art"><Image src={videoGame.img_url} alt={videoGame.title} fluid /></td>,
                                             <td>{videoGame.title}</td>,
                                             <td>{videoGame.system.name}</td>,
                                             <td>{videoGame.genre.name}</td>
                                             ])
                                         })}
                                     </tr>
-                                </thead>
+                                </tbody>
                             </Table>
                         </div>
                         <div className="reviews">
