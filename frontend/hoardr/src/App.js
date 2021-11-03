@@ -8,13 +8,13 @@ import Generation from './components/Generation/Generation'
 import Genre from './components/Genre/Genre'
 import Index from './components/Index/index.js'
 import Subgenre from './components/Subgenre/Subgenre'
+import Registration from './components/Registration/Registration';
 import {Navbar, Container, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import './App.css'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 
@@ -127,7 +127,7 @@ class App extends React.Component {
   }
 
   render() {
-    // const { addUser, addReview } = this
+    const { addUser, addReview } = this
     const { reviews, videoGames, currentUser } = this.state
     return (
       <Router>
@@ -192,6 +192,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} reviews={reviews} videoGames={videoGames} />
+            </Route>
+            <Route exact path="/registration">
+              <Registration addUser={addUser}/>
             </Route>
             <Route exact path="/login">
               <Login setCurrentUser={this.setCurrentUser}/>
