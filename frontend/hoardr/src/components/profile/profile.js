@@ -50,7 +50,7 @@ class Profile extends Component {
                                     <tr>
                                     {videoGames.map(function (videoGame) { 
                                             return ([
-                                            <td className="box-art"><Image src={videoGame.img_url} alt={videoGame.title} fluid /></td>,
+                                            <td id="box-art"><Image src={videoGame.img_url} alt={videoGame.title} fluid /></td>,
                                             <td>{videoGame.title}</td>,
                                             <td>{videoGame.system.name}</td>,
                                             <td>{videoGame.genre.name}</td>

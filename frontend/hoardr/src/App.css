@@ -3,12 +3,7 @@
     height: 300px;
 }
 
-.box-art {
-    height: 250px;
-    width: 150px;
-}
-
-img {
+#box-art {
     height: 20%;
     width: 20%;
 }
@@ -46,7 +41,7 @@ a:active {
   }
 
 #search-bar {
-    padding-right: 55px;
+    padding-right: 25px;
 }  
 
 .navbar {

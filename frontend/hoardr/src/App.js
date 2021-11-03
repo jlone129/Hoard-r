@@ -149,7 +149,7 @@ class App extends React.Component {
               <Form className="d-flex" id="search-bar">
                 <FormControl
                   type="search"
-                  placeholder="Search"
+                  placeholder="Search Video Games"
                   className="me-2"
                   aria-label="Search"
                 />
@@ -158,6 +158,7 @@ class App extends React.Component {
               <Nav>
                 <NavDropdown title="User Menu" id="input-group-dropdown-2" align="end">
                   <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/registration">Register</NavDropdown.Item>
                   <span onClick={this.handleLogout}>
                     {currentUser ?
                       <NavDropdown.Item href="/login">Logout</NavDropdown.Item>

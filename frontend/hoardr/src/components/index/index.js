@@ -20,7 +20,7 @@ class Index extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><img src={videoGame.img_url} alt={videoGame.title}/></td>
+                            <td><img src={videoGame.img_url} id="box-art" alt={videoGame.title}/></td>
                             <td>{videoGame.title}</td>
                             <td>{videoGame.system.name}</td>
                             <td>{videoGame.genre.name}</td>
