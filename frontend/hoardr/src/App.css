@@ -7,3 +7,18 @@
     height: 250px;
     width: 150px;
 }
+
+ul {
+    list-style-type: none;
+}
+
+a:link { text-decoration: none; }
+
+
+a:visited { text-decoration: none; }
+
+
+a:hover { text-decoration: none; }
+
+
+a:active { text-decoration: none; }
