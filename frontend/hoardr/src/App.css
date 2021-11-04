@@ -50,6 +50,6 @@ a:active {
     padding: 0;
 }
 
-#form-required {
+#form-required, #error-message {
     color: red;
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router';
-import { Form, FormControl, Button, Container, ButtonToolbar } from 'react-bootstrap'
+import { Form, Button, Container } from 'react-bootstrap'
 
 const userUrl = `http://localhost:3000/users/`
 
@@ -13,7 +13,8 @@ class Registration extends Component {
       img_url: "",
       password: "",
       email: "",
-      birthdate: ""
+      birthdate: "",
+      created: false
     }
   }
 
@@ -22,7 +23,7 @@ class Registration extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefualt();
+    e.preventDefault();
     const {
       username,
       img_url,
@@ -35,7 +36,7 @@ class Registration extends Component {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         user: {
@@ -52,8 +53,8 @@ class Registration extends Component {
         this.props.addUser(newUser)
         if (newUser.status === "created") {
           this.setState({created: true})
+          this.props.history.push("/login")
         }
-        this.props.history.push("/login")
       });
   };
 
@@ -68,19 +69,21 @@ class Registration extends Component {
         <Container className="w-25 p-3">
         <h1>Registration</h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formUser">
+            <Form.Group role="form" className="mb-3" controlId="formUser">
               <Form.Label>Username <span id="form-required">*</span></Form.Label>
-              <Form.Control type="username" placeholder="Username" />
+              <Form.Control type="text" placeholder="Username" onChange={handleChange}/>
               <Form.Label>Email address <span id="form-required">*</span></Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control type="email" placeholder="Enter email" onChange={handleChange}/>
               <Form.Label>Password <span id="form-required">*</span></Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control type="password" placeholder="Password" onChange={handleChange} />
+              {/* <Form.Label>Password Confirmation<span id="form-required">*</span></Form.Label>
+              <Form.Control type="password" placeholder="Confirm Password" onChange={handleChange}/> */}
               <Form.Label>Profile Image</Form.Label>
-              <Form.Control type="file" />
-              <Form.Label>Date of Birth</Form.Label>
-              <Form.Control type="date" name="dob" placeholder="Birthdate" />
+              <Form.Control type="file" onChange={handleChange}/>
+              <Form.Label>Date of Birth <span id="form-required">*</span></Form.Label>
+              <Form.Control type="date" name="dob" placeholder="Birthdate" onChange={handleChange}/>
+              <Button variant="primary" type="submit">Submit</Button>
             </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
           </Form>
         </Container> 
       </div>

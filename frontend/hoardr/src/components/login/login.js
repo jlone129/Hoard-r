@@ -65,7 +65,7 @@ class Login extends Component {
                     </div>
                 </form>
 
-                {this.state.errorMessage !== "" ? <h4 className="error">{this.state.errorMessage}</h4> : null}
+                {this.state.errorMessage !== "" ? <h4 id="error-message">{this.state.errorMessage}</h4> : null}
             </div>
         )
     }

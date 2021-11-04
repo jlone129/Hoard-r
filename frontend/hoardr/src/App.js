@@ -6,7 +6,7 @@ import Profile from './components/Profile/profile.js'
 import System from './components/System/system.js'
 import Generation from './components/Generation/Generation'
 import Genre from './components/Genre/Genre'
-import Index from './components/Index/index.js'
+import Index from './components/VideoGame/VideoGame.js'
 import Subgenre from './components/Subgenre/Subgenre'
 import Registration from './components/Registration/Registration';
 import {Navbar, Container, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
@@ -61,7 +61,6 @@ class App extends React.Component {
       fetch(urlGenerations),
       fetch(urlGenres),
       fetch(urlSubgenres),
-      fetch(urlUserVideoGames)
     ])
       .then(([res1, res2, res3, res4, res5, res6, res7]) => Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json(), res6.json(), res7.json()]))
       .then(([users, reviews, videoGames, systems, generations, genres, subgenres]) => this.setState({
