@@ -17,11 +17,11 @@ class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
 
-        render json: @user
+        render json: @user, include: [:user_video_game, :review, :video_game]
     end
 
     def create
-        @user = User.new(user_params)
+        @user = User.create(user_params)
 
         if @user.valid?
             render json: { user: @user }, status: :created
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :password, :img_url, :email, :birthdate)
+        params.require(:user).permit(:username, :password, :password_confirmation, :img_url, :email, :birthdate)
     end
 
 end

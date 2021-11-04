@@ -18,7 +18,7 @@ class Subgenre extends Component {
             </thead>
             <tbody>
               <tr>
-                <td><img src={subgenre.img_url} /></td>
+                <td><img src={subgenre.img_url} alt={subgenre.name}/></td>
                 <td>{subgenre.name}</td>
                 <td>{subgenre.description}</td>
               </tr>

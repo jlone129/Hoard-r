@@ -21,7 +21,7 @@ class Generation extends Component {
             </thead>
             <tbody>
               <tr>
-                <td><img src={gen.img_url} /></td>
+                <td><img src={gen.img_url} alt={gen.name}/></td>
                 <td>{gen.name}</td>
                 <td>{gen.start_date}</td>
                 <td>{gen.end_date}</td>

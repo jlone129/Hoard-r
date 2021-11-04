@@ -19,7 +19,7 @@ class Genre extends Component {
             </thead>
             <tbody>
               <tr>
-                <td><img src={genre.img_url} /></td>
+                <td><img src={genre.img_url} alt={genre.name}/></td>
                 <td>{genre.name}</td>
                 <td>{genre.description}</td>
               </tr>

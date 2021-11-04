@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    has_secure_password
+    has_secure_password validations: false
 
     has_many :user_video_games
     has_many :video_games, through: :user_video_games
