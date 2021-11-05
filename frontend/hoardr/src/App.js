@@ -126,7 +126,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { addUser, addReview } = this
+    const { addUser, addReview, removeReview, editReview, removeUser } = this
     const { reviews, videoGames, currentUser } = this.state
     return (
       <Router>
@@ -175,7 +175,7 @@ class App extends React.Component {
               <Homepage />
             </Route>
             <Route exact path="/index">
-              {videoGames.map(videoGame => <Index videoGame={videoGame} />)}
+              {videoGames.map(videoGame => <Index addReview={addReview} editReview={editReview} removeReview={removeReview} videoGame={videoGame} />)}
             </Route>
             <Route exact path="/system">
               {this.state.systems.map(system => <System system={system} />)}
@@ -190,7 +190,7 @@ class App extends React.Component {
               {this.state.subgenres.map(subgenre => <Subgenre subgenre={subgenre} />)}
             </Route>
             <Route exact path="/profile">
-              <Profile user={this.state.currentUser} reviews={reviews} videoGames={videoGames} />
+              <Profile user={this.state.currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} />
             </Route>
             <Route exact path="/registration">
               <Registration addUser={addUser}/>
