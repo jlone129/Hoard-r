@@ -4,8 +4,6 @@ import Image from 'react-bootstrap/Image';
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 
-const urlUsers = `http://localhost:3000/users/`
-
 class Profile extends Component {
 
     constructor() {
