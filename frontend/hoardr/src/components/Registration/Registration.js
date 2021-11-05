@@ -55,7 +55,7 @@ class Registration extends Component {
         if(newUser.status === "created") {
           this.setState({created: true})
         }
-        // this.props.history.push("/login")
+        this.props.history.push("/profile")
       });
   };
 

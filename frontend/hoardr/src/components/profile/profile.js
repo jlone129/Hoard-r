@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Image from 'react-bootstrap/Image';
 import Table from 'react-bootstrap/Table';
+import { Button } from 'react-bootstrap';
+
+const urlUsers = `http://localhost:3000/users/`
 
 class Profile extends Component {
 
@@ -13,8 +16,24 @@ class Profile extends Component {
         }
     }
 
+
+  handleRemoveUser = () => {
+    fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${localStorage.token}`
+        }
+    })
+    .then(res => res.json())
+    .then(() => {
+        this.props.removeUser(this.props.user)
+        alert("User Successfully Deleted")
+        this.props.history.push("/")
+    })
+  }
+
     render() {
-        const { user, reviews, videoGames } = this.props
+        const { user, reviews, videoGames} = this.props
         return (
             <div className="profile-page">
                 {user?
@@ -86,6 +105,9 @@ class Profile extends Component {
                                     </tr>
                                 </tbody>
                             </Table>
+                        </div>
+                        <div id="deleteThis" >
+                            <Button variant="danger" onClick={this.handleRemoveUser}>Delete User</Button>
                         </div>
                     </div>
                 : null}
