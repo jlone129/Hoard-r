@@ -138,7 +138,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { addUser, addReview, removeReview, editReview, editUser, removeUser } = this
+    const { addUser, addReview, removeReview, editReview, editUser, removeUser, handleLogout } = this
     const { reviews, videoGames, currentUser } = this.state
     return (
       <Router>
@@ -168,7 +168,9 @@ class App extends React.Component {
               </Form>
               <Nav>
                 <NavDropdown title="User Menu" id="input-group-dropdown-2" align="end">
-                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  {currentUser &&
+                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  }
                   {currentUser ?
                     <NavDropdown.Item href="/update">Update User</NavDropdown.Item>
                   :
@@ -206,7 +208,7 @@ class App extends React.Component {
               {this.state.subgenres.map(subgenre => <Subgenre subgenre={subgenre} />)}
             </Route>
             <Route exact path="/profile">
-              <Profile user={this.state.currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} />
+              <Profile user={this.state.currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} logout={handleLogout}/>
             </Route>
             {currentUser ?
               <Route exact path="/update">
@@ -214,7 +216,7 @@ class App extends React.Component {
               </Route>
             :
               <Route exact path="/registration">
-                <Registration addUser={addUser}/>
+                <Registration addUser={addUser} setCurrentUser={this.setCurrentUser}/>
               </Route>
             }
             <Route exact path="/login">

@@ -27,6 +27,7 @@ class Profile extends Component {
         this.props.removeUser(this.props.user)
         alert("User Successfully Deleted")
         this.props.history.push("/")
+        this.props.handleLogout()
     })
   }
 
