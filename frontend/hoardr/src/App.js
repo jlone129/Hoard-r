@@ -169,7 +169,11 @@ class App extends React.Component {
               <Nav>
                 <NavDropdown title="User Menu" id="input-group-dropdown-2" align="end">
                   <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                  <NavDropdown.Item href="/registration">Register</NavDropdown.Item>
+                  {currentUser ?
+                    <NavDropdown.Item href="/update">Update User</NavDropdown.Item>
+                  :
+                    <NavDropdown.Item href="/registration">Register</NavDropdown.Item>
+                  }
                   <span onClick={this.handleLogout}>
                     {currentUser ?
                       <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
@@ -204,11 +208,11 @@ class App extends React.Component {
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} />
             </Route>
-            {this.state.currentUser ?
+            {currentUser ?
               <Route exact path="/update">
-                <Update editUser={editUser} user={this.state.currentUser} />
+                <Update editUser={editUser} user={currentUser} />
               </Route>
-            :  
+            :
               <Route exact path="/registration">
                 <Registration addUser={addUser}/>
               </Route>

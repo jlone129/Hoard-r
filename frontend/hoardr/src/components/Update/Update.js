@@ -23,6 +23,7 @@ class Update extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { user } = this.props
     const {
       username,
       img_url,
@@ -31,8 +32,8 @@ class Update extends Component {
       birthdate
     } = this.state;
 
-    fetch(`http://localhost:3000/users/${this.props.user.id}`, {
-      method: "POST",
+    fetch(`http://localhost:3000/users/${user.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -75,7 +76,7 @@ class Update extends Component {
               <Form.Control type="email" name="email" defaultValue={user.email} onChange={handleChange}/>
               <Form.Label>Password <span id="form-required">*</span></Form.Label>
               <Form.Control type="password" name="password" placeholder="Password" onChange={handleChange} />
-              <Form.Label>Password Confirmation<span id="form-required">*</span></Form.Label>
+              <Form.Label>Password Confirmation <span id="form-required">*</span></Form.Label>
               <Form.Control type="password" name="password" placeholder="Confirm Password" onChange={handleChange}/>
               <Form.Label>Profile Image</Form.Label>
               <Form.Control type="text" name="img_url" defaultValue={user.img_url} onChange={handleChange}/>

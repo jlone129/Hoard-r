@@ -60,9 +60,9 @@ class Login extends Component {
                 <Form onSubmit={handleLogin}>
                     <Form.Group role="form" className="mb-3" controlId="formUser">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" id="username" placeholder="Username" name="username" onChange={handleChange} />
+                        <Form.Control type="text" placeholder="Username" name="username" onChange={handleChange} />
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" id="password" placeholder="Password" name="password" onChange={handleChange} />
+                        <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
                         <Button type="submit">Login</Button>
                     </Form.Group>
                 </Form>
