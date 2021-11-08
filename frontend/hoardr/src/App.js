@@ -9,6 +9,7 @@ import Genre from './components/Genre/Genre'
 import Index from './components/VideoGame/VideoGame.js'
 import Subgenre from './components/Subgenre/Subgenre'
 import Registration from './components/Registration/Registration';
+import Update from './components/Update/Update';
 import {Navbar, Container, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
 import './App.css'
 import {
@@ -102,6 +103,17 @@ class App extends React.Component {
     this.setState({ users: [...this.state.users, newUser] })
   }
 
+  editUser = editedUser => {
+    let userEdit = this.state.users.map( user => {
+      if(user.id === editedUser.id) {
+        return editedUser
+      } else {
+        return user
+      }
+    })
+    this.setState({ users: userEdit })
+  }
+
   addReview = newReview => {
     this.setState({ reviews: [...this.state.reviews, newReview] })
   }
@@ -126,7 +138,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { addUser, addReview, removeReview, editReview, removeUser } = this
+    const { addUser, addReview, removeReview, editReview, editUser, removeUser } = this
     const { reviews, videoGames, currentUser } = this.state
     return (
       <Router>
@@ -192,9 +204,15 @@ class App extends React.Component {
             <Route exact path="/profile">
               <Profile user={this.state.currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} />
             </Route>
-            <Route exact path="/registration">
-              <Registration addUser={addUser}/>
-            </Route>
+            {this.state.currentUser ?
+              <Route exact path="/update">
+                <Update editUser={editUser} user={this.state.currentUser} />
+              </Route>
+            :  
+              <Route exact path="/registration">
+                <Registration addUser={addUser}/>
+              </Route>
+            }
             <Route exact path="/login">
               <Login setCurrentUser={this.setCurrentUser}/>
             </Route>
