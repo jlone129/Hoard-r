@@ -14,12 +14,12 @@ class Index extends Component {
             let updated = new Date(review.updated_at)
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
-            console.log(review.video_game.id)
-            console.log(videoGame.id)
+            console.log(review.user.id)
             if(review.video_game.id === videoGame.id) {
                 return (
                     <>
                         <Card.Body>
+                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
                             <Card.Title>{review.title}</Card.Title>
                             <Card.Text>{review.description}</Card.Text>
                         </Card.Body>
