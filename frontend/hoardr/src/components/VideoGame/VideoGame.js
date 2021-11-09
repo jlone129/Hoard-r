@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, ListGroup, ListGroupItem, Button, Container } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Button, Container, Carousel, CarouselItem } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 
 // const videoGameURL = `http://localhost:3000/video_games/`
@@ -18,14 +18,18 @@ class Index extends Component {
             if(review.video_game.id === videoGame.id) {
                 return (
                     <>
-                        <Card.Body>
-                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
-                            <Card.Title>{review.title}</Card.Title>
-                            <Card.Text>{review.description}</Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last Updated: {dayDifference} days ago</small>
-                        </Card.Footer>
+                        <Carousel>
+                            <Carousel.Item>
+                                <Card.Body>
+                                    <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
+                                    <Card.Title><b>{review.title}</b></Card.Title>
+                                    <Card.Text>{review.description}</Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <small className="text-muted">Last Updated: {dayDifference} days ago</small>
+                                </Card.Footer>
+                            </Carousel.Item>
+                        </Carousel>
                     </>
                 );
             }
