@@ -8,7 +8,6 @@ class Update extends Component {
     super();
     
     this.state = {
-      username: "",
       img_url: "",
       password: "",
       email: "",
@@ -23,31 +22,21 @@ class Update extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { user } = this.props
-    const {
-      username,
-      img_url,
-      password,
-      email,
-      birthdate
-    } = this.state;
 
-    fetch(`http://localhost:3000/users/${user.id}`, {
+    fetch(`http://localhost:3000/users/${this.props.user.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Authorization": `Bearer ${localStorage.token}`
       },
       body: JSON.stringify({
-        user: {
-          "username": username,
-          "img_url": img_url,
-          "password": password,
-          "password_confirmation": password,
-          "email": email,
-          "birthdate": birthdate
+        "email": e.target[1].value,
+        "password": e.target[2].value,
+        "password_confirmation": e.target[3].value,
+        "img_url": e.target[4].value,
+        "birthdate": e.target[5].value
         }
-      }),
+      ),
     })
       .then((res) => res.json())
       .then((editedUser) => {
@@ -55,7 +44,6 @@ class Update extends Component {
         if(editedUser.status === "created") {
           this.setState({updated: true})
         }
-        this.props.history.push("/profile")
       });
   };
 

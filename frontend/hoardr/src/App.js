@@ -208,7 +208,7 @@ class App extends React.Component {
               {this.state.subgenres.map(subgenre => <Subgenre subgenre={subgenre} />)}
             </Route>
             <Route exact path="/profile">
-              <Profile user={this.state.currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} logout={handleLogout}/>
+              <Profile user={currentUser} reviews={reviews} removeUser={removeUser} videoGames={videoGames} logout={handleLogout}/>
             </Route>
             {currentUser ?
               <Route exact path="/update">
