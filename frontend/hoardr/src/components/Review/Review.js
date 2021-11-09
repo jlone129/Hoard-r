@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Form } from 'react-bootstrap';
+import { Container, Form, Button, CloseButton, Card } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 
 class Review extends Component {
@@ -61,7 +61,7 @@ class Review extends Component {
 
         const { handleEditReview, editToggle, handleDeleteReview, handleChange } = this
         const { review } = this.props
-        let showReview = ""
+        let showEdit;
 
         function editReviewForm() {
             return(
@@ -81,14 +81,19 @@ class Review extends Component {
         }
 
         if(this.state.edit) {
-            showReview = editReviewForm()
+            showEdit = editReviewForm()
         } else {
-            showReview = null
+            showEdit = null
         }
 
         return (
             <div>
                 <h1>Review Controller</h1>
+                <Card>
+                    <CloseButton onClick={handleDeleteReview}>Delete</CloseButton>
+                    <Card.Header></Card.Header>
+                    <Button onClick={showEdit}>Edit</Button>
+                </Card>
             </div>
         )
     }
