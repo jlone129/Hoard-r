@@ -61,12 +61,13 @@ class Review extends Component {
 
         const { handleEditReview, editToggle, handleDeleteReview, handleChange } = this
         const { review } = this.props
+        let showReview = ""
 
         function editReviewForm() {
             return(
                 <Container className="w-25 p-3">
-                    <Form onSubmit={this.handleEditReview}>
-                        <Form.Group></Form.Group>
+                    <Form onSubmit={handleEditReview}>
+                        <Form.Group role="form" className="mb-3"></Form.Group>
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" id="title" name="title"></Form.Control>
                             <Form.Label>Description</Form.Label>
@@ -78,6 +79,13 @@ class Review extends Component {
                 </Container>
             )
         }
+
+        if(this.state.edit) {
+            showReview = editReviewForm()
+        } else {
+            showReview = null
+        }
+
         return (
             <div>
                 <h1>Review Controller</h1>
