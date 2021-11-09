@@ -58,11 +58,11 @@ class Login extends Component {
                 <h1>Login Page</h1>
                 {this.state.errorMessage !== "" ? <h6 id="error-message">{this.state.errorMessage}</h6> : null}
                 <Form onSubmit={handleLogin}>
-                    <Form.Group role="form" className="mb-3" controlId="formUser">
+                    <Form.Group role="form" className="mb-3">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" placeholder="Username" name="username" onChange={handleChange} />
+                        <Form.Control type="text" id="username" placeholder="Username" name="username" onChange={handleChange} />
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" name="password" onChange={handleChange} />
+                        <Form.Control type="password" id="password" placeholder="Password" name="password" onChange={handleChange} />
                         <Button type="submit">Login</Button>
                     </Form.Group>
                 </Form>

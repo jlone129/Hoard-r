@@ -69,19 +69,19 @@ class Update extends Component {
         <Container className="w-25 p-3">
         <h1>Update {user.username}</h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group role="form" className="mb-3" controlId="formUser">
+            <Form.Group role="form" className="mb-3">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" name="username" value={user.username} readOnly/>
+              <Form.Control type="text" id="username" name="username" value={user.username} readOnly/>
               <Form.Label>Email address <span id="form-required">*</span></Form.Label>
-              <Form.Control type="email" name="email" defaultValue={user.email} onChange={handleChange}/>
+              <Form.Control type="email" id="email" name="email" defaultValue={user.email} onChange={handleChange}/>
               <Form.Label>Password <span id="form-required">*</span></Form.Label>
-              <Form.Control type="password" name="password" placeholder="Password" onChange={handleChange} />
+              <Form.Control type="password" id="password" name="password" placeholder="Password" onChange={handleChange} />
               <Form.Label>Password Confirmation <span id="form-required">*</span></Form.Label>
-              <Form.Control type="password" name="password" placeholder="Confirm Password" onChange={handleChange}/>
+              <Form.Control type="password" id="password-confirmation" name="password" placeholder="Confirm Password" onChange={handleChange}/>
               <Form.Label>Profile Image</Form.Label>
-              <Form.Control type="text" name="img_url" defaultValue={user.img_url} onChange={handleChange}/>
+              <Form.Control type="text" id="img_url" name="img_url" defaultValue={user.img_url} onChange={handleChange}/>
               <Form.Label>Date of Birth <span id="form-required">*</span></Form.Label>
-              <Form.Control type="date" name="birthdate" defaultValue={user.birthdate} onChange={handleChange}/>
+              <Form.Control type="date" id="birthdate" name="birthdate" defaultValue={user.birthdate} onChange={handleChange}/>
               <Button variant="primary" type="submit">Submit</Button>
             </Form.Group>
           </Form>

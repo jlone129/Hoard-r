@@ -71,19 +71,19 @@ class Registration extends Component {
         <Container className="w-25 p-3">
         <h1>Registration</h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group role="form" className="mb-3" controlId="formUser">
+            <Form.Group role="form" className="mb-3">
               <Form.Label>Username <span id="form-required">*</span></Form.Label>
-              <Form.Control type="text" name="username" placeholder="Username" onChange={handleChange}/>
+              <Form.Control type="text" id="username" name="username" placeholder="Username" onChange={handleChange}/>
               <Form.Label>Email address <span id="form-required">*</span></Form.Label>
-              <Form.Control type="email" name="email" placeholder="Enter email" onChange={handleChange}/>
+              <Form.Control type="email" id="email" name="email" placeholder="Enter email" onChange={handleChange}/>
               <Form.Label>Password <span id="form-required">*</span></Form.Label>
-              <Form.Control type="password" name="password" placeholder="Password" onChange={handleChange} />
+              <Form.Control type="password" id="password" name="password" placeholder="Password" onChange={handleChange} />
               <Form.Label>Password Confirmation<span id="form-required">*</span></Form.Label>
-              <Form.Control type="password" name="password" placeholder="Confirm Password" onChange={handleChange}/>
+              <Form.Control type="password" id="confirm-password" name="password" placeholder="Confirm Password" onChange={handleChange}/>
               <Form.Label>Profile Image</Form.Label>
-              <Form.Control type="text" name="img_url" placeholder="Image URL" onChange={handleChange}/>
+              <Form.Control type="text" id="img_url" name="img_url" placeholder="Image URL" onChange={handleChange}/>
               <Form.Label>Date of Birth <span id="form-required">*</span></Form.Label>
-              <Form.Control type="date" name="birthdate" placeholder="Birthdate" onChange={handleChange}/>
+              <Form.Control type="date" id="birthdate" name="birthdate" placeholder="Birthdate" onChange={handleChange}/>
               <Button variant="primary" type="submit">Submit</Button>
             </Form.Group>
           </Form>
