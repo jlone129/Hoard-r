@@ -250,6 +250,7 @@ class App extends React.Component {
               {React.Children.toArray(
                 videoGames.map((videoGame) => (
                   <Index
+                    currentUser={currentUser}
                     reviews={reviews}
                     addReview={addReview}
                     editReview={editReview}

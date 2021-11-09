@@ -9,8 +9,9 @@
     margin-right: 10px;
 }
 
-#review-user {
-    margin-top: 20px;
+#close-button {
+    padding-left: 30rem;
+    position: fixed;
 }
 
 ul {

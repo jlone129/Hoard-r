@@ -1,26 +1,47 @@
 import React, { Component } from 'react'
-import { Card, ListGroup, ListGroupItem, Button, Container, Carousel, CarouselItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem, Button, Container, Carousel, CarouselItem, CloseButton } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 
 // const videoGameURL = `http://localhost:3000/video_games/`
 
 class Index extends Component {
 
+    handleDeleteReview = () => {
+        fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(res => res.json())
+        .then(() => {
+            this.props.removeReview(this.props.review)
+            alert("Message successfully removed")
+        })
+    }
+
     getReview = () => {
-        const { videoGame, reviews } = this.props
+        const { videoGame, reviews, currentUser } = this.props
+        const { handleDeleteReview } = this
+
         return React.Children.toArray(reviews.map(review => {
             let today = new Date( Date.now() )
             let oneDay = 1000 * 60 * 60 * 24
             let updated = new Date(review.updated_at)
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
-            console.log(review.user.id)
+
             if(review.video_game.id === videoGame.id) {
                 return (
                     <>
                         <Carousel>
                             <Carousel.Item>
                                 <Card.Body>
+                                    {currentUser.id === review.user.id ?
+                                        <CloseButton id="close-button" onclick={handleDeleteReview}/>
+                                    :
+                                        <CloseButton id="close-button" disabled />
+                                    }
                                     <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
                                     <Card.Title><b>{review.title}</b></Card.Title>
                                     <Card.Text>{review.description}</Card.Text>
