@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Form } from 'react-bootstrap';
 import { withRouter } from 'react-router';
 
 class Review extends Component {
@@ -45,7 +46,8 @@ class Review extends Component {
             },
             body: JSON.stringify({
                 "title": e.target[0].value,
-                "description": e.target[1].value
+                "description": e.target[1].value,
+                "stars": e.target[2].value
             })
         })
         .then(res => res.json())
@@ -56,6 +58,26 @@ class Review extends Component {
     }
 
     render() {
+
+        const { handleEditReview, editToggle, handleDeleteReview, handleChange } = this
+        const { review } = this.props
+
+        function editReviewForm() {
+            return(
+                <Container className="w-25 p-3">
+                    <Form onSubmit={this.handleEditReview}>
+                        <Form.Group></Form.Group>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" id="title" name="title"></Form.Control>
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" id="description" name="description"></Form.Control>
+                            <Form.Label>Stars</Form.Label>
+                            <Form.Control type="integer" id="stars" name="stars"></Form.Control>
+                            <Button type="submit">Update Review</Button>
+                    </Form>
+                </Container>
+            )
+        }
         return (
             <div>
                 <h1>Review Controller</h1>
