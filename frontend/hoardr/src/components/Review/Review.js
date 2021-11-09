@@ -22,7 +22,7 @@ class Review extends Component {
 
     handleDeleteReview = () => {
         fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
-            method:'DELETE',
+            method: 'DELETE',
             headers: {
                 "Authorization": `Bearer ${localStorage.token}`
             }
@@ -31,6 +31,27 @@ class Review extends Component {
         .then(() => {
             this.props.removeReview(this.props.review)
             alert("Message successfully removed")
+        })
+    }
+
+    handleEditReview = (e) => {
+        e.preventDefault()
+
+        fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify({
+                "title": e.target[0].value,
+                "description": e.target[1].value
+            })
+        })
+        .then(res => res.json())
+        .then(editedReview => {
+            this.props.editReview(editedReview)
+            this.editToggle()
         })
     }
 
