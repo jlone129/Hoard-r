@@ -169,6 +169,20 @@ class App extends React.Component {
     });
   };
 
+  handleDeleteReview = () => {
+    fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
+        method: 'DELETE',
+        headers: {
+            "Authorization": `Bearer ${localStorage.token}`
+        }
+    })
+    .then(res => res.json())
+    .then(() => {
+        this.props.removeReview(this.props.review)
+        alert("Message successfully removed")
+    })
+  }
+
   render() {
     const {
       addUser,
@@ -178,6 +192,7 @@ class App extends React.Component {
       editUser,
       removeUser,
       handleLogout,
+      handleDeleteReview,
     } = this;
     const { reviews, videoGames, currentUser } = this.state;
     return (
@@ -256,6 +271,7 @@ class App extends React.Component {
                     editReview={editReview}
                     removeReview={removeReview}
                     videoGame={videoGame}
+                    handleDeleteReview={handleDeleteReview}
                   />
                 ))
               )}

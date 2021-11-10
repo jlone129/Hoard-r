@@ -6,23 +6,55 @@ import { withRouter } from "react-router-dom";
 
 class Index extends Component {
 
-    handleDeleteReview = () => {
-        fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
-            method: 'DELETE',
+    constructor() {
+        super();
+
+        this.state = {
+            title: "",
+            description: "",
+            stars: 0,
+            video_game: {},
+            user: {},
+            created: false
+        }
+    }
+
+    handleAddReview = (e) => {
+        e.preventDefault();
+        const {
+            title,
+            description,
+            stars
+        } = this.state;
+
+        fetch(`http://localhost:3000/reviews/`, {
+            method: 'POST',
             headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
-            }
+            },
+            body: JSON.stringify({
+                review: {
+                    "title": title,
+                    "description": description,
+                    "stars": stars,
+                    "video_game": this.props.videoGame,
+                    "user": this.props.currentUser,
+                }
+            }),
         })
-        .then(res => res.json())
-        .then(() => {
-            this.props.removeReview(this.props.review)
-            alert("Message successfully removed")
+        .then((res) => res.json())
+        .then((newReview) => {
+            this.props.addReview(newReview)
+            if(newReview.status === "created") {
+                this.setState({created: true})
+            }
         })
     }
 
     getReview = () => {
-        const { videoGame, reviews, currentUser } = this.props
-        const { handleDeleteReview } = this
+        const { videoGame, reviews, currentUser, handleDeleteReview, handleAddReview } = this.props
 
         return React.Children.toArray(reviews.map(review => {
             let today = new Date( Date.now() )
@@ -34,7 +66,7 @@ class Index extends Component {
             if(review.video_game.id === videoGame.id) {
                 return (
                     <>
-                        <Carousel>
+                        <Carousel fade>
                             <Carousel.Item>
                                 <Card.Body>
                                     {currentUser.id === review.user.id ?
@@ -65,7 +97,7 @@ class Index extends Component {
             <div>
                 <Container>
                     <h1>Video Game Library</h1>
-                    <Card style={{ width: '18rem' }}>
+                    <Card style={{ width: '20rem' }}>
                         <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
                         <Card.Body>
                             <Card.Title>{videoGame.title}</Card.Title>
