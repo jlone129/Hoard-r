@@ -42,6 +42,7 @@ class Review extends Component {
                                     <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
                                     <Card.Title><b>{review.title}</b></Card.Title>
                                     <Card.Text>{review.description}</Card.Text>
+                                    <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
                                 </Card.Body>
                                 <Card.Footer>
                                     <small className="text-muted">Last Updated: {dayDifference} days ago</small>
@@ -164,7 +165,7 @@ class Review extends Component {
     }
 
     //Allows current user to see the review edit form
-    toggleButton = () => {
+    editToggleButton = () => {
         
         let { editToggle } = this
 
@@ -179,13 +180,13 @@ class Review extends Component {
 
     render() {
 
-        const { getReview, toggleButton, editReviewForm} = this
+        const { getReview, editToggleButton, editReviewForm} = this
         const { edit } = this.state
 
         return (
             <>
                 {getReview()}   
-                {toggleButton()}
+                {editToggleButton()}
                 { edit === true ? editReviewForm() : null }
             </>
         )

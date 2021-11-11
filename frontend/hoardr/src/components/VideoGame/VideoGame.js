@@ -14,7 +14,7 @@ class Index extends Component {
             <div>
                 <Container>
                     <h1>Video Game Library</h1>
-                    <Card style={{ width: '20rem' }}>
+                    <Card style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
                         <Card.Body>
                             <Card.Title>{videoGame.title}</Card.Title>

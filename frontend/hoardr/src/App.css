@@ -10,7 +10,8 @@
 }
 
 #close-button {
-    padding-left: 33rem;
+    padding-left: 29rem;
+    /* padding-top: 2rem; */
     position: absolute;
 }
 
