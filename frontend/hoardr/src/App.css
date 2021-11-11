@@ -11,7 +11,7 @@
 
 #close-button {
     padding-left: 33rem;
-    position: fixed;
+    position: absolute;
 }
 
 ul {

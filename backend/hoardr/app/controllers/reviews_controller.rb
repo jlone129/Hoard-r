@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
         @review = Review.create(review_params)
         
         if @review.valid?
-            render json: @review
+            render json: @review, include: [:user, :video_game]
         else
             render json: { error: "failed to update "}, status: :not_acceptable
         end    
@@ -29,7 +29,7 @@ class ReviewsController < ApplicationController
         @review = Review.find(params[:id])
 
         if @review.update(review_params)
-            render json: @review
+            render json: @review, include: [:user, :video_game]
         else
             render json: @review.errors, status: :unprocessable_entity
         end
@@ -44,7 +44,7 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.require(:reviews).permit(:title, :description, :stars, :video_game)
+        params.require(:review).permit(:title, :description, :stars, :video_game, :user)
     end
 
 end

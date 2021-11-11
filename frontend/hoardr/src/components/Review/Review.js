@@ -101,7 +101,11 @@ class Review extends Component {
     handleEditReview = (e) => {
         e.preventDefault()
 
-        fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
+        let rev;
+
+        this.props.reviews.map(review => rev = review)
+
+        fetch(`http://localhost:3000/reviews/${rev.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -122,8 +126,8 @@ class Review extends Component {
 
     editReviewForm = () => {
 
-        let { reviews, handleEditReview } = this.props
-        let { handleChange } = this
+        let { reviews } = this.props
+        let { handleChange, handleEditReview } = this
 
         return React.Children.toArray(reviews.map( review =>{
             return(
