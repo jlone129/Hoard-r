@@ -71,7 +71,7 @@ class Profile extends Component {
                                             <td id="box-art"><Image src={userVideoGame.video_game.img_url} alt={userVideoGame.title} fluid /></td>,
                                             <td>{userVideoGame.video_game.title}</td>,
                                             <td>{userVideoGame.video_game.system.name}</td>,
-                                            <td>{userVideoGame.video_game.genre}</td>
+                                            <td>{userVideoGame.video_game.genre.name}</td>
                                             ])
                                         })}
                                     </tr>

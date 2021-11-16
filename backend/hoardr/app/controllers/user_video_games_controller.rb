@@ -7,7 +7,7 @@ class UserVideoGamesController < ApplicationController
 
         render json: @user_video_games, include: 
             [:user, 
-            :video_game => {:system}]
+            :video_game => { include: [:system, :genre] }]
     end
 
     def show
@@ -15,7 +15,7 @@ class UserVideoGamesController < ApplicationController
     
         render json: @user_video_game, include: 
             [:user, 
-            :video_game => {:system}]
+            :video_game => { include: [:system, :genre] }]
     end
 
     def new
