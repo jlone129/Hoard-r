@@ -41,3 +41,7 @@ reviews = Review.create([
 Subgenre.create([
     { name: "Horror", img_url: "https://res.cloudinary.com/lmn/image/upload/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinnyop/b/7/4/orig_b741b794f94e52ccf4f9163d7011bad0.jpg", description: "Scary and freaky", genre: Genre.first }
 ])
+
+UserVideoGame.create!([
+    { user: User.first, video_game: VideoGame.first}
+])

@@ -237,6 +237,9 @@ class App extends React.Component {
                   {currentUser && (
                     <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   )}
+                  {currentUser && (
+                    <NavDropdown.Item href="/user_video_game">My Games</NavDropdown.Item>
+                  )}
                   {currentUser ? (
                     <NavDropdown.Item href="/update">
                       Update User
@@ -305,6 +308,11 @@ class App extends React.Component {
                 videoGames={videoGames}
                 logout={handleLogout}
               />
+            </Route>
+            <Route exact path="/user_video_game">
+                <UserVideoGame 
+                  user={currentUser}
+                />
             </Route>
             {currentUser ? (
               <Route exact path="/update">
