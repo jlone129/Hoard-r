@@ -10,6 +10,7 @@ import Index from "./components/VideoGame/VideoGame.js";
 import Subgenre from "./components/Subgenre/Subgenre";
 import Registration from "./components/Registration/Registration";
 import Update from "./components/Update/Update";
+import UserVideoGame from "./components/UserVideoGame/UserVideoGame";
 import {
   Navbar,
   Container,
