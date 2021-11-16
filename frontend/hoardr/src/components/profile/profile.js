@@ -32,7 +32,7 @@ class Profile extends Component {
   }
 
     render() {
-        const { user, reviews, videoGames} = this.props
+        const { user, reviews, userVideoGames } = this.props
         return (
             <div className="profile-page">
                 {user?
@@ -66,12 +66,12 @@ class Profile extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                    {videoGames.map(function (videoGame) { 
+                                    {userVideoGames.map(function (userVideoGame) { 
                                             return ([
-                                            <td id="box-art"><Image src={videoGame.img_url} alt={videoGame.title} fluid /></td>,
-                                            <td>{videoGame.title}</td>,
-                                            <td>{videoGame.system.name}</td>,
-                                            <td>{videoGame.genre.name}</td>
+                                            <td id="box-art"><Image src={userVideoGame.video_game.img_url} alt={userVideoGame.title} fluid /></td>,
+                                            <td>{userVideoGame.video_game.title}</td>,
+                                            <td>{userVideoGame.video_game.system.name}</td>,
+                                            <td>{userVideoGame.video_game.genre}</td>
                                             ])
                                         })}
                                     </tr>

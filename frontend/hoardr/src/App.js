@@ -69,8 +69,9 @@ class App extends React.Component {
       fetch(urlGenerations),
       fetch(urlGenres),
       fetch(urlSubgenres),
+      fetch(urlUserVideoGames)
     ])
-      .then(([res1, res2, res3, res4, res5, res6, res7]) =>
+      .then(([res1, res2, res3, res4, res5, res6, res7, res8]) =>
         Promise.all([
           res1.json(),
           res2.json(),
@@ -79,6 +80,7 @@ class App extends React.Component {
           res5.json(),
           res6.json(),
           res7.json(),
+          res8.json()
         ])
       )
       .then(
@@ -90,6 +92,7 @@ class App extends React.Component {
           generations,
           genres,
           subgenres,
+          userVideoGames
         ]) =>
           this.setState({
             users: users,
@@ -99,6 +102,7 @@ class App extends React.Component {
             generations: generations,
             genres: genres,
             subgenres: subgenres,
+            userVideoGames: userVideoGames
           })
       );
   }
@@ -195,7 +199,7 @@ class App extends React.Component {
       handleLogout,
       handleDeleteReview,
     } = this;
-    const { reviews, videoGames, currentUser } = this.state;
+    const { reviews, videoGames, currentUser, userVideoGames } = this.state;
     return (
       <Router>
         <div>
@@ -305,7 +309,7 @@ class App extends React.Component {
                 user={currentUser}
                 reviews={reviews}
                 removeUser={removeUser}
-                videoGames={videoGames}
+                userVideoGames={userVideoGames}
                 logout={handleLogout}
               />
             </Route>
