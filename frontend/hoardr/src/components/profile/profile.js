@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Image from 'react-bootstrap/Image';
-import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
+import Review from '../Review/Review';
+import { Button, 
+        Image, 
+        Container, 
+        Card, 
+        ListGroup, 
+        ListGroupItem,
+        Table } from 'react-bootstrap';
 
 class Profile extends Component {
 
@@ -32,7 +37,18 @@ class Profile extends Component {
   }
 
     render() {
-        const { user, reviews, userVideoGames } = this.props
+        
+        const { 
+            user, 
+            reviews, 
+            userVideoGames,
+            videoGames,
+            addReview,
+            editReview,
+            removeReview,
+            handleDeleteReview    
+        } = this.props
+
         return (
             <div className="profile-page">
                 {user?
@@ -54,29 +70,36 @@ class Profile extends Component {
                             <h5>DOB: <span>{user.birthdate}</span></h5>
                         </div>
                         <div className="video_games">
-                            <h1>Video Games</h1>
-                            <Table striped bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Box Art</th>
-                                        <th>Title</th>
-                                        <th>System</th>
-                                        <th>Genre</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    {userVideoGames.map(function (userVideoGame) { 
-                                            return ([
-                                            <td id="box-art"><Image src={userVideoGame.video_game.img_url} alt={userVideoGame.title} fluid /></td>,
-                                            <td>{userVideoGame.video_game.title}</td>,
-                                            <td>{userVideoGame.video_game.system.name}</td>,
-                                            <td>{userVideoGame.video_game.genre.name}</td>
-                                            ])
-                                        })}
-                                    </tr>
-                                </tbody>
-                            </Table>
+                            <h1>Owned Games</h1>
+                            <Container>
+                                {React.Children.toArray(userVideoGames.map((userVideoGame) => (
+                                    <Card style={{ width: '18rem' }}>
+                                        <Card.Img variant="top" src={userVideoGame.video_game.img_url} alt={userVideoGame.title} />
+                                        <Card.Body>
+                                            <Card.Title>{userVideoGame.title}</Card.Title>
+                                            <Card.Text>{userVideoGame.description}</Card.Text>
+                                        </Card.Body>
+                                        <ListGroup className="list-group-flush">
+                                            <ListGroupItem><b>System:</b> {userVideoGame.video_game.system.name}</ListGroupItem>
+                                            <ListGroupItem><b>Genre:</b> {userVideoGame.video_game.genre.name}</ListGroupItem>
+                                        </ListGroup>
+                                        <Card.Header><b>Reviews</b></Card.Header>
+                                        {React.Children.toArray(videoGames.map((videoGame) => (
+                                            <Review currentUser={user}
+                                            reviews={reviews}
+                                            addReview={addReview}
+                                            editReview={editReview}
+                                            removeReview={removeReview}
+                                            videoGame={videoGame}
+                                            userVideoGame={userVideoGame}
+                                            handleDeleteReview={handleDeleteReview}/>
+                                        )))}
+                                        <Card.Footer>
+                                            <Button>Remove Game</Button>
+                                        </Card.Footer>
+                                    </Card>
+                                )))}
+                            </Container>
                         </div>
                         <div className="reviews">
                             <h1>Reviews</h1>
@@ -92,15 +115,18 @@ class Profile extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{user.username}</td>
-                                        {reviews.map(function (review) { 
-                                            return ([
-                                            <td>{review.video_game.title}</td>,
-                                            <td>{review.title}</td>,
-                                            <td>{review.description}</td>,
-                                            <td>{review.stars}</td>
-                                            ])
-                                        })}
+                                        {React.Children.toArray(reviews.map((review) => (
+                                            review.user.id === user.id &&
+                                                reviews.map(function (review) { 
+                                                    return ([
+                                                        <td>{user.username}</td>,
+                                                        <td>{review.video_game.title}</td>,
+                                                        <td>{review.title}</td>,
+                                                        <td>{review.description}</td>,
+                                                        <td>{review.stars}</td>
+                                                    ])
+                                                })
+                                        )))}
                                     </tr>
                                 </tbody>
                             </Table>

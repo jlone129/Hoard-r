@@ -189,6 +189,7 @@ class App extends React.Component {
   }
 
   render() {
+
     const {
       addUser,
       addReview,
@@ -199,7 +200,13 @@ class App extends React.Component {
       handleLogout,
       handleDeleteReview,
     } = this;
-    const { reviews, videoGames, currentUser, userVideoGames } = this.state;
+
+    const { 
+      reviews, 
+      videoGames, 
+      currentUser, 
+      userVideoGames } = this.state;
+
     return (
       <Router>
         <div>
@@ -310,6 +317,11 @@ class App extends React.Component {
                 reviews={reviews}
                 removeUser={removeUser}
                 userVideoGames={userVideoGames}
+                videoGames={videoGames}
+                addReview={addReview}
+                editReview={editReview}
+                handleDeleteReview={handleDeleteReview}
+                removeReview={removeReview}
                 logout={handleLogout}
               />
             </Route>
