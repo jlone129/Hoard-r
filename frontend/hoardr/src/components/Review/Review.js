@@ -19,7 +19,13 @@ class Review extends Component {
     }
 
     getReview = () => {
-        const { videoGame, reviews, currentUser, handleDeleteReview } = this.props
+        const { 
+            videoGame, 
+            reviews, 
+            currentUser, 
+            handleDeleteReview, 
+            userVideoGame 
+        } = this.props
 
         return React.Children.toArray(reviews.map(review => {
             let today = new Date( Date.now() )
@@ -28,7 +34,7 @@ class Review extends Component {
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
 
-            if(review.video_game.id === videoGame.id) {
+            if(review.video_game.id === videoGame.id || review.video_game.id === userVideoGame.video_game.id) {
                 return (
                     <>
                         <Carousel fade>
@@ -51,6 +57,12 @@ class Review extends Component {
                         </Carousel>
                     </>
                 );
+            } else {
+                return (
+                    <div>
+                        <h5>Be the first to review this game!</h5>
+                    </div>
+                )
             }
         }))
     }
