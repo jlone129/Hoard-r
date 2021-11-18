@@ -14,7 +14,8 @@ class Review extends Component {
             video_game: {},
             user: {},
             created: false,
-            edit: false
+            edit: false,
+            add: false
         }
     }
 
@@ -34,7 +35,7 @@ class Review extends Component {
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
 
-            if(review.video_game.id === videoGame.id || review.video_game.id === userVideoGame.video_game.id) {
+            if(review.video_game.id === videoGame.id) {
                 return (
                     <>
                         <Carousel fade>
@@ -72,30 +73,30 @@ class Review extends Component {
         this.setState({edit})
     }
 
+    addToggle = () => {
+        let add = !this.state.add
+        this.setState({add})
+    }
+
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
     handleAddReview = (e) => {
         e.preventDefault();
-        const {
-            title,
-            description,
-            stars
-        } = this.state;
 
         fetch(`http://localhost:3000/reviews/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                Accept: "application/json",
+                "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             },
             body: JSON.stringify({
                 review: {
-                    "title": title,
-                    "description": description,
-                    "stars": stars,
+                    "title": e.target[0].value,
+                    "description": e.target[1].value,
+                    "stars": e.target[2].value,
                     "video_game": this.props.videoGame,
                     "user": this.props.currentUser,
                 }
@@ -108,6 +109,7 @@ class Review extends Component {
                 this.setState({created: true})
                 return(<Alert>Review successfully added</Alert>)
             }
+            this.addToggle()
         })
     }
 
@@ -176,6 +178,45 @@ class Review extends Component {
         }))
     }
 
+    addReviewForm = () => {
+
+        let { reviews } = this.props
+        let { handleChange, handleAddReview } = this
+
+        return React.Children.toArray(reviews.map( review =>{
+            return(
+                <Container className="w-100 p-3">
+                    <Form onSubmit={handleAddReview}>
+                        <Form.Group role="form" className="mb-3" id="addReviewForm">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                id="title" 
+                                name="title" 
+                                placeholder="Title"
+                                onChange={handleChange} />
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                id="description" 
+                                name="description" 
+                                placeholder="Description" 
+                                onChange={handleChange} />
+                            <Form.Label>Stars</Form.Label>
+                            <Form.Control 
+                                type="integer" 
+                                id="stars" 
+                                name="stars" 
+                                placeholder="Enter 1 - 5"
+                                onChange={handleChange} />
+                            <Button type="submit">Add Review</Button>
+                        </Form.Group>
+                    </Form>
+                </Container>
+            )
+        }))
+    }
+
     //Allows current user to see the review edit form
     editToggleButton = () => {
         
@@ -192,14 +233,23 @@ class Review extends Component {
 
     render() {
 
-        const { getReview, editToggleButton, editReviewForm} = this
-        const { edit } = this.state
+        const { 
+            getReview, 
+            editToggleButton, 
+            editReviewForm, 
+            addToggle, 
+            addReviewForm
+        } = this
+        
+        const { edit, add } = this.state
 
         return (
             <>
                 {getReview()}   
                 {editToggleButton()}
                 { edit === true ? editReviewForm() : null }
+                <Button onClick={addToggle}>Add Review</Button>
+                { add === true ? addReviewForm() : null }
             </>
         )
     }

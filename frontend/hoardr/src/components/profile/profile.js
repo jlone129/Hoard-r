@@ -120,6 +120,7 @@ class Profile extends Component {
                                                 reviews.map(function (review) { 
                                                     return ([
                                                         <td>{user.username}</td>,
+                                                        <>{console.log(review.video_game.title)}</>,
                                                         <td>{review.video_game.title}</td>,
                                                         <td>{review.title}</td>,
                                                         <td>{review.description}</td>,

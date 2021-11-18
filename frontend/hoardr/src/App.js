@@ -205,7 +205,8 @@ class App extends React.Component {
       reviews, 
       videoGames, 
       currentUser, 
-      userVideoGames } = this.state;
+      userVideoGames 
+    } = this.state;
 
     return (
       <Router>
