@@ -1,3 +1,5 @@
+require 'pry'
+
 class ReviewsController < ApplicationController
 
     skip_before_action :authorized
@@ -15,11 +17,15 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        @review = Review.create(review_params)
         
-        if @review.valid?
-            render json: @review, include: [:user, :video_game]
+        set_user
+        set_video_game
+
+        if review.save
+            # binding.pry
+            render json: review, include: [:user, :video_game]
         else
+            binding.pry
             render json: { error: "failed to update "}, status: :not_acceptable
         end    
 
@@ -44,7 +50,17 @@ class ReviewsController < ApplicationController
     private
 
     def review_params
-        params.require(:review).permit(:title, :description, :stars, :video_game, :user)
+        params.require(:review).permit(:title, :description, :stars)
+    end
+
+    def set_user
+        user = User.find(params[:review][:user][:id])
+        review.user_id = user.id
+    end
+
+    def set_video_game
+        video_game = VideoGame.find(params[:review][:video_game][:id])
+        review.video_game.id = video_game.id
     end
 
 end
