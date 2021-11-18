@@ -17,9 +17,10 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        
-        set_user
-        set_video_game
+        review = Review.new(review_params)
+
+        review.user_id = set_user
+        review.video_game_id = set_video_game
 
         if review.save
             # binding.pry
@@ -55,12 +56,12 @@ class ReviewsController < ApplicationController
 
     def set_user
         user = User.find(params[:review][:user][:id])
-        review.user_id = user.id
+        user.id
     end
 
     def set_video_game
         video_game = VideoGame.find(params[:review][:video_game][:id])
-        review.video_game.id = video_game.id
+        video_game.id
     end
 
 end

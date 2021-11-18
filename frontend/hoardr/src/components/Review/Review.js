@@ -25,7 +25,6 @@ class Review extends Component {
             reviews, 
             currentUser, 
             handleDeleteReview, 
-            userVideoGame 
         } = this.props
 
         return React.Children.toArray(reviews.map(review => {
@@ -37,26 +36,25 @@ class Review extends Component {
 
             if(review.video_game.id === videoGame.id) {
                 return (
-                    <>
-                        <Carousel fade>
-                            <Carousel.Item>
-                                <Card.Body>
-                                    {currentUser.id === review.user.id ?
-                                        <CloseButton id="close-button" onClick={handleDeleteReview}/>
-                                    :
-                                        <CloseButton id="close-button" disabled />
-                                    }
-                                    <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
-                                    <Card.Title><b>{review.title}</b></Card.Title>
-                                    <Card.Text>{review.description}</Card.Text>
-                                    <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted">Last Updated: {dayDifference} days ago</small>
-                                </Card.Footer>
-                            </Carousel.Item>
-                        </Carousel>
-                    </>
+                    <Carousel fade>
+                        <Carousel.Item>
+                            <Card.Body>
+                                {currentUser.id === review.user.id ?
+                                    <CloseButton id="close-button" onClick={handleDeleteReview}/>
+                                :
+                                    <CloseButton id="close-button" disabled />
+                                }
+                                <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
+                                <Card.Title><b>{review.title}</b></Card.Title>
+                                <Card.Text>{review.description}</Card.Text>
+                                <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                <small className="text-muted">Last Updated: {dayDifference} days ago</small>
+                            </Card.Footer>
+                        </Carousel.Item>
+                    </Carousel>
+                    
                 );
             } else {
                 return (
