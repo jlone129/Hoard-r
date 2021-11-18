@@ -59,9 +59,7 @@ class Review extends Component {
                         <Card.Footer>
                             <small className="text-muted">Last Updated: {dayDifference} days ago</small>
                         </Card.Footer>
-                        {review.id &&
-                            editToggleButton()
-                        }
+                        { editToggleButton() }
                         { edit === true ? editReviewForm() : null }
                     </>
                     

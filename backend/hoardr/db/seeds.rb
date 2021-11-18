@@ -28,11 +28,13 @@ System.create([
 ])
 
 genres = Genre.create([
-    { name: "Dating Sim", img_url: "https://i.insider.com/5d8bd6742e22af48ba108351?width=750&format=jpeg&auto=webp", description: "Love is all you need"}
+    { name: "Dating Sim", img_url: "https://i.insider.com/5d8bd6742e22af48ba108351?width=750&format=jpeg&auto=webp", description: "Love is all you need"},
+    { name: "Horror", img_url: "https://res.cloudinary.com/lmn/image/upload/e_sharpen:100/f_auto,fl_lossy,q_auto/v1/gameskinnyop/b/7/4/orig_b741b794f94e52ccf4f9163d7011bad0.jpg", description: "Scary and freaky" }
 ])
 
 video_games = VideoGame.create!([
-    { title: "John Simulator", img_url: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6c09a221-be4b-4da8-b2cd-ada0605c5a34/daymh8e-e76c93e2-ccfb-43ec-9d0f-814b1d96b494.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzZjMDlhMjIxLWJlNGItNGRhOC1iMmNkLWFkYTA2MDVjNWEzNFwvZGF5bWg4ZS1lNzZjOTNlMi1jY2ZiLTQzZWMtOWQwZi04MTRiMWQ5NmI0OTQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ihFY2erRByN3RIOEqgfYrhhhfa3JSn1nOVqhMNnWqWQ", system: System.first, genre: genres.first }
+    { title: "John Simulator", img_url: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6c09a221-be4b-4da8-b2cd-ada0605c5a34/daymh8e-e76c93e2-ccfb-43ec-9d0f-814b1d96b494.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzZjMDlhMjIxLWJlNGItNGRhOC1iMmNkLWFkYTA2MDVjNWEzNFwvZGF5bWg4ZS1lNzZjOTNlMi1jY2ZiLTQzZWMtOWQwZi04MTRiMWQ5NmI0OTQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ihFY2erRByN3RIOEqgfYrhhhfa3JSn1nOVqhMNnWqWQ", description: "Ever wanted to feel like a John, this is the best way of feeling the John in you!", system: System.first, genre: genres.first },
+    { title: "Pog Daddy", img_url: "https://i.ytimg.com/vi/Sh44mLlagEw/hqdefault.jpg", description: "A game of horror, can you defeat the evil pog master and become the ultimate pog daddy!?", system: System.first,  genre: Genre.second }
 ])
     
 reviews = Review.create([

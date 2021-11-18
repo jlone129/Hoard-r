@@ -193,6 +193,10 @@ class App extends React.Component {
     })
   }
 
+  addUserGame = (newUserGame) =>{
+    this.setState({userVideoGames: [...this.state.userVideoGames, newUserGame]})
+  }
+
   render() {
 
     const {
@@ -204,6 +208,7 @@ class App extends React.Component {
       removeUser,
       handleLogout,
       handleDeleteReview,
+      addUserGame
     } = this;
 
     const { 
@@ -218,7 +223,7 @@ class App extends React.Component {
         <div>
           <Navbar bg="dark" variant="dark">
             <Container>
-              <Navbar.Brand href="/home">Hoard-r</Navbar.Brand>
+              <Navbar.Brand href="/">Hoard-r</Navbar.Brand>
               <Nav className="me-auto">
                 <NavDropdown title="Video Games" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="/video_games">
@@ -293,6 +298,7 @@ class App extends React.Component {
                     removeReview={removeReview}
                     videoGame={videoGame}
                     handleDeleteReview={handleDeleteReview}
+                    addUserGame={addUserGame}
                   />
                 ))
               )}

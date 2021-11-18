@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_213218) do
   create_table "video_games", force: :cascade do |t|
     t.string "title"
     t.string "img_url"
+    t.string "description"
     t.bigint "system_id"
     t.bigint "genre_id"
     t.datetime "created_at", precision: 6, null: false

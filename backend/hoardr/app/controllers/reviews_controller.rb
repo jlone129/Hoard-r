@@ -1,5 +1,3 @@
-require 'pry'
-
 class ReviewsController < ApplicationController
 
     skip_before_action :authorized
@@ -23,10 +21,8 @@ class ReviewsController < ApplicationController
         review.video_game_id = set_video_game
 
         if review.save
-            # binding.pry
             render json: review, include: [:user, :video_game]
         else
-            binding.pry
             render json: { error: "failed to update "}, status: :not_acceptable
         end    
 
