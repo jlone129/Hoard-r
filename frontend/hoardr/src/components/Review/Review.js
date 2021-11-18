@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Form, Button, CloseButton, Card, Carousel, Alert } from 'react-bootstrap';
+import { Container, Form, Button, CloseButton, Card, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Review extends Component {
 
@@ -24,8 +25,15 @@ class Review extends Component {
             videoGame, 
             reviews, 
             currentUser, 
-            handleDeleteReview, 
+            handleDeleteReview,
         } = this.props
+
+        const {
+            editToggleButton,
+            editReviewForm
+        } = this
+
+        const { edit } = this.state
 
         return React.Children.toArray(reviews.map(review => {
             let today = new Date( Date.now() )
@@ -36,24 +44,26 @@ class Review extends Component {
 
             if(review.video_game.id === videoGame.id) {
                 return (
-                    <Carousel fade>
-                        <Carousel.Item>
-                            <Card.Body>
-                                {currentUser.id === review.user.id ?
-                                    <CloseButton id="close-button" onClick={handleDeleteReview}/>
-                                :
-                                    <CloseButton id="close-button" disabled />
-                                }
-                                <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
-                                <Card.Title><b>{review.title}</b></Card.Title>
-                                <Card.Text>{review.description}</Card.Text>
-                                <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted">Last Updated: {dayDifference} days ago</small>
-                            </Card.Footer>
-                        </Carousel.Item>
-                    </Carousel>
+                    <>
+                        <Card.Body>
+                            {currentUser.id === review.user.id ?
+                                <CloseButton id="close-button" onClick={handleDeleteReview}/>
+                            :
+                                <CloseButton id="close-button" disabled />
+                            }
+                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
+                            <Card.Title><b>{review.title}</b></Card.Title>
+                            <Card.Text>{review.description}</Card.Text>
+                            <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small className="text-muted">Last Updated: {dayDifference} days ago</small>
+                        </Card.Footer>
+                        {review.id &&
+                            editToggleButton()
+                        }
+                        { edit === true ? editReviewForm() : null }
+                    </>
                     
                 );
             } else {
@@ -233,19 +243,15 @@ class Review extends Component {
 
         const { 
             getReview, 
-            editToggleButton, 
-            editReviewForm, 
             addToggle, 
             addReviewForm
         } = this
         
-        const { edit, add } = this.state
+        const { add } = this.state
 
         return (
             <>
                 {getReview()}   
-                {editToggleButton()}
-                { edit === true ? editReviewForm() : null }
                 <Button onClick={addToggle}>Add Review</Button>
                 { add === true ? addReviewForm() : null }
             </>

@@ -175,7 +175,12 @@ class App extends React.Component {
   };
 
   handleDeleteReview = () => {
-    fetch(`http://localhost:3000/reviews/${this.props.review.id}`, {
+    const { reviews } = this.state
+    let review;
+
+    reviews.map((oneReview) => review = oneReview)
+
+    fetch(`http://localhost:3000/reviews/${review.id}`, {
         method: 'DELETE',
         headers: {
             "Authorization": `Bearer ${localStorage.token}`
@@ -183,7 +188,7 @@ class App extends React.Component {
     })
     .then(res => res.json())
     .then(() => {
-        this.props.removeReview(this.props.review)
+        this.removeReview(review)
         alert("Message successfully removed")
     })
   }

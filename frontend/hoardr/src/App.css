@@ -1,3 +1,7 @@
+.profile-pic {
+    width: 300px;
+    height: 300px;
+}
 
 #review-pic {
     height: 20%;
@@ -35,35 +39,21 @@ a:active {
     text-decoration: none; 
 }
 
-.navbar-brand {
-    font-size: large;
-    padding-top: 1.5rem;
-    position: relative;
-    text-decoration: none;
-    white-space: nowrap;
-}
+.navbar > .container {
+    max-width: 100%;
+    margin: 10px;
+    padding-left: 25px;
+    padding-right: 20px;
+  }
 
 #search-bar {
-    margin-left: 10rem;
     padding-right: 25px;
     width: 40%;
 }  
 
 .navbar {
-    font-size: medium;
     margin: 0;
     padding: 0;
-}
-
-.navbar > .container {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    max-width: 100%;
-}
-
-.navbar-expand .navbar-nav .dropdown-menu {
-    position: absolute;
-    font-size: 16px;
 }
 
 #form-required, #error-message {
