@@ -217,7 +217,7 @@ class App extends React.Component {
               <Nav className="me-auto">
                 <NavDropdown title="Video Games" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="/video_games">
-                    Video Game Index
+                    Video Games
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/genre">Genres</NavDropdown.Item>
                   <NavDropdown.Item href="/subgenre">
