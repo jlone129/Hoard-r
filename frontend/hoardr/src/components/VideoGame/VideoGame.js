@@ -64,7 +64,7 @@ class Index extends Component {
         } = this.props
 
         return(
-            videoGames.map((videoGame) => 
+            React.Children.toArray(videoGames.map((videoGame) => 
                 <div>
                         <Card style={{ width: '20rem' }}>
                             <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
@@ -89,7 +89,7 @@ class Index extends Component {
                             </Card.Body>
                         </Card>
                 </div>
-            )
+            ))
         )
         
     }

@@ -42,37 +42,28 @@ class Review extends Component {
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
 
-            return videoGames.map(videoGame => {
-                if(review.video_game.id === videoGame.id) {
-                    return (
-                        <>
-                            <Card.Body>
-                                {currentUser.id === review.user.id ?
-                                    <CloseButton id="close-button" onClick={handleDeleteReview}/>
-                                :
-                                    <CloseButton id="close-button" disabled />
-                                }
-                                <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
-                                <Card.Title><b>{review.title}</b></Card.Title>
-                                <Card.Text>{review.description}</Card.Text>
-                                <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted">Last Updated: {dayDifference} days ago</small>
-                            </Card.Footer>
-                            { editToggleButton() }
-                            { edit === true ? editReviewForm() : null }
-                        </>
-                        
-                    );
-                } else {
-                    return (
-                        <div>
-                            <h5>Be the first to review this game!</h5>
-                        </div>
-                    )
-                }
-            })
+                return (
+                    <>
+                        <Card.Body>
+                            {currentUser.id === review.user.id ?
+                                <CloseButton id="close-button" onClick={handleDeleteReview}/>
+                            :
+                                <CloseButton id="close-button" disabled />
+                            }
+                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
+                            <Card.Title><b>{review.title}</b></Card.Title>
+                            <Card.Text>{review.description}</Card.Text>
+                            <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small className="text-muted">Last Updated: {dayDifference} days ago</small>
+                        </Card.Footer>
+                        { editToggleButton() }
+                        { edit === true ? editReviewForm() : null }
+                    </>
+                    
+                );
+
         }))
     }
 
@@ -243,6 +234,7 @@ class Review extends Component {
             addReviewForm
         } = this
         
+        const { reviews } = this.props
         const { add } = this.state
 
         return (
