@@ -54,15 +54,22 @@ class Index extends Component {
 
     render() {
         const { 
-            videoGame, 
             reviews, 
             currentUser, 
             addReview, 
             editReview, 
             removeReview, 
-            handleDeleteReview 
+            handleDeleteReview,
+            videoGames
         } = this.props
 
+        let videoGame;
+
+        console.log(videoGames)
+
+        videoGames.map((oneVideoGame) => oneVideoGame = videoGame)
+
+        console.log(videoGame)
         return(
             <div>
                     <Card style={{ width: '20rem' }}>

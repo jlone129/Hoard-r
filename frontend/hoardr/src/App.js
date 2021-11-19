@@ -218,6 +218,8 @@ class App extends React.Component {
       userVideoGames 
     } = this.state;
 
+    console.log(videoGames)
+
     return (
       <Router>
         <div>
@@ -288,20 +290,16 @@ class App extends React.Component {
               <Homepage />
             </Route>
             <Route exact path="/video_games">
-              {React.Children.toArray(
-                videoGames.map((videoGame) => (
                   <Index
                     currentUser={currentUser}
                     reviews={reviews}
                     addReview={addReview}
                     editReview={editReview}
                     removeReview={removeReview}
-                    videoGame={videoGame}
+                    videoGames={videoGames}
                     handleDeleteReview={handleDeleteReview}
                     addUserGame={addUserGame}
                   />
-                ))
-              )}
             </Route>
             <Route exact path="/system">
               {React.Children.toArray(this.state.systems.map((system) => (
