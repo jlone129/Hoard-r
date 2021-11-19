@@ -76,24 +76,22 @@ class Profile extends Component {
                                     <Card style={{ width: '18rem' }}>
                                         <Card.Img variant="top" src={userVideoGame.video_game.img_url} alt={userVideoGame.title} />
                                         <Card.Body>
-                                            <Card.Title>{userVideoGame.title}</Card.Title>
-                                            <Card.Text>{userVideoGame.description}</Card.Text>
+                                            <Card.Title>{userVideoGame.video_game.title}</Card.Title>
+                                            <Card.Text>{userVideoGame.video_game.description}</Card.Text>
                                         </Card.Body>
                                         <ListGroup className="list-group-flush">
                                             <ListGroupItem><b>System:</b> {userVideoGame.video_game.system.name}</ListGroupItem>
                                             <ListGroupItem><b>Genre:</b> {userVideoGame.video_game.genre.name}</ListGroupItem>
                                         </ListGroup>
                                         <Card.Header><b>Reviews</b></Card.Header>
-                                        {React.Children.toArray(videoGames.map((videoGame) => (
                                             <Review currentUser={user}
                                             reviews={reviews}
                                             addReview={addReview}
                                             editReview={editReview}
                                             removeReview={removeReview}
-                                            videoGame={videoGame}
+                                            videoGames={videoGames}
                                             userVideoGame={userVideoGame}
                                             handleDeleteReview={handleDeleteReview}/>
-                                        )))}
                                         <Card.Footer>
                                             <Button>Remove Game</Button>
                                         </Card.Footer>

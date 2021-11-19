@@ -63,38 +63,33 @@ class Index extends Component {
             videoGames
         } = this.props
 
-        let videoGame;
-
-        console.log(videoGames)
-
-        videoGames.map((oneVideoGame) => oneVideoGame = videoGame)
-
-        console.log(videoGame)
         return(
-            <div>
-                    <Card style={{ width: '20rem' }}>
-                        <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
-                        <Card.Body>
-                            <Card.Title>{videoGame.title}</Card.Title>
-                            <Card.Text>{videoGame.description}</Card.Text>
-                        </Card.Body>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem><b>System:</b> {videoGame.system.name}</ListGroupItem>
-                            <ListGroupItem><b>Genre:</b> {videoGame.genre.name}</ListGroupItem>
-                        </ListGroup>
-                        <Card.Header><b>Reviews</b></Card.Header>
-                        <Review currentUser={currentUser}
-                            reviews={reviews}
-                            addReview={addReview}
-                            editReview={editReview}
-                            removeReview={removeReview}
-                            videoGame={videoGame}
-                            handleDeleteReview={handleDeleteReview}/>
-                        <Card.Body>
-                                <Button varient="primary">Add to Collection</Button>
-                        </Card.Body>
-                    </Card>
-            </div>
+            videoGames.map((videoGame) => 
+                <div>
+                        <Card style={{ width: '20rem' }}>
+                            <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
+                            <Card.Body>
+                                <Card.Title>{videoGame.title}</Card.Title>
+                                <Card.Text>{videoGame.description}</Card.Text>
+                            </Card.Body>
+                            <ListGroup className="list-group-flush">
+                                <ListGroupItem><b>System:</b> {videoGame.system.name}</ListGroupItem>
+                                <ListGroupItem><b>Genre:</b> {videoGame.genre.name}</ListGroupItem>
+                            </ListGroup>
+                            <Card.Header><b>Reviews</b></Card.Header>
+                            <Review currentUser={currentUser}
+                                reviews={reviews}
+                                addReview={addReview}
+                                editReview={editReview}
+                                removeReview={removeReview}
+                                videoGames={videoGames}
+                                handleDeleteReview={handleDeleteReview}/>
+                            <Card.Body>
+                                    <Button varient="primary">Add to Collection</Button>
+                            </Card.Body>
+                        </Card>
+                </div>
+            )
         )
         
     }

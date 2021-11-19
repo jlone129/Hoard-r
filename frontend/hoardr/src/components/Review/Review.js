@@ -22,7 +22,7 @@ class Review extends Component {
 
     getReview = () => {
         const { 
-            videoGame, 
+            videoGames, 
             reviews, 
             currentUser, 
             handleDeleteReview,
@@ -42,35 +42,37 @@ class Review extends Component {
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
 
-            if(review.video_game.id === videoGame.id) {
-                return (
-                    <>
-                        <Card.Body>
-                            {currentUser.id === review.user.id ?
-                                <CloseButton id="close-button" onClick={handleDeleteReview}/>
-                            :
-                                <CloseButton id="close-button" disabled />
-                            }
-                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
-                            <Card.Title><b>{review.title}</b></Card.Title>
-                            <Card.Text>{review.description}</Card.Text>
-                            <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last Updated: {dayDifference} days ago</small>
-                        </Card.Footer>
-                        { editToggleButton() }
-                        { edit === true ? editReviewForm() : null }
-                    </>
-                    
-                );
-            } else {
-                return (
-                    <div>
-                        <h5>Be the first to review this game!</h5>
-                    </div>
-                )
-            }
+            return videoGames.map(videoGame => {
+                if(review.video_game.id === videoGame.id) {
+                    return (
+                        <>
+                            <Card.Body>
+                                {currentUser.id === review.user.id ?
+                                    <CloseButton id="close-button" onClick={handleDeleteReview}/>
+                                :
+                                    <CloseButton id="close-button" disabled />
+                                }
+                                <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
+                                <Card.Title><b>{review.title}</b></Card.Title>
+                                <Card.Text>{review.description}</Card.Text>
+                                <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                <small className="text-muted">Last Updated: {dayDifference} days ago</small>
+                            </Card.Footer>
+                            { editToggleButton() }
+                            { edit === true ? editReviewForm() : null }
+                        </>
+                        
+                    );
+                } else {
+                    return (
+                        <div>
+                            <h5>Be the first to review this game!</h5>
+                        </div>
+                    )
+                }
+            })
         }))
     }
 
@@ -185,42 +187,38 @@ class Review extends Component {
     }
 
     addReviewForm = () => {
-
-        let { reviews } = this.props
+        
         let { handleChange, handleAddReview } = this
-
-        return React.Children.toArray(reviews.map( review =>{
-            return(
-                <Container className="w-100 p-3">
-                    <Form onSubmit={handleAddReview}>
-                        <Form.Group role="form" className="mb-3" id="addReviewForm">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                id="title" 
-                                name="title" 
-                                placeholder="Title"
-                                onChange={handleChange} />
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                id="description" 
-                                name="description" 
-                                placeholder="Description" 
-                                onChange={handleChange} />
-                            <Form.Label>Stars</Form.Label>
-                            <Form.Control 
-                                type="integer" 
-                                id="stars" 
-                                name="stars" 
-                                placeholder="Enter 1 - 5"
-                                onChange={handleChange} />
-                            <Button type="submit">Add Review</Button>
-                        </Form.Group>
-                    </Form>
-                </Container>
-            )
-        }))
+        return(
+            <Container className="w-100 p-3">
+                <Form onSubmit={handleAddReview}>
+                    <Form.Group role="form" className="mb-3" id="addReviewForm">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            id="title" 
+                            name="title" 
+                            placeholder="Title"
+                            onChange={handleChange} />
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control 
+                            type="text" 
+                            id="description" 
+                            name="description" 
+                            placeholder="Description" 
+                            onChange={handleChange} />
+                        <Form.Label>Stars</Form.Label>
+                        <Form.Control 
+                            type="integer" 
+                            id="stars" 
+                            name="stars" 
+                            placeholder="Enter 1 - 5"
+                            onChange={handleChange} />
+                        <Button type="submit">Add Review</Button>
+                    </Form.Group>
+                </Form>
+            </Container>
+        )
     }
 
     //Allows current user to see the review edit form

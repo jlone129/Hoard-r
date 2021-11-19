@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Homepage from "./components/Homepage/homepage";
 import Login from "./components/Login/login.js";
@@ -38,7 +38,7 @@ const urlGenres = `http://localhost:3000/genres/`;
 const urlSubgenres = `http://localhost:3000/subgenres/`;
 const urlLogout = `http://localhost:3000/logout`;
 
-class App extends React.Component {
+class App extends Component {
   state = {
     users: [],
     reviews: [],
@@ -199,6 +199,8 @@ class App extends React.Component {
 
   render() {
 
+    if(this.state.videoGames.length === 0) return null
+
     const {
       addUser,
       addReview,
@@ -217,8 +219,6 @@ class App extends React.Component {
       currentUser, 
       userVideoGames 
     } = this.state;
-
-    console.log(videoGames)
 
     return (
       <Router>
@@ -290,16 +290,16 @@ class App extends React.Component {
               <Homepage />
             </Route>
             <Route exact path="/video_games">
-                  <Index
-                    currentUser={currentUser}
-                    reviews={reviews}
-                    addReview={addReview}
-                    editReview={editReview}
-                    removeReview={removeReview}
-                    videoGames={videoGames}
-                    handleDeleteReview={handleDeleteReview}
-                    addUserGame={addUserGame}
-                  />
+                <Index
+                  currentUser={currentUser}
+                  reviews={reviews}
+                  addReview={addReview}
+                  editReview={editReview}
+                  removeReview={removeReview}
+                  videoGames={videoGames}
+                  handleDeleteReview={handleDeleteReview}
+                  addUserGame={addUserGame}
+                />
             </Route>
             <Route exact path="/system">
               {React.Children.toArray(this.state.systems.map((system) => (
