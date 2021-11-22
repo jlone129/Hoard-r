@@ -22,7 +22,7 @@ class Review extends Component {
 
     getReview = () => {
         const { 
-            videoGames, 
+            videoGame, 
             reviews, 
             currentUser, 
             handleDeleteReview,
@@ -34,15 +34,16 @@ class Review extends Component {
         } = this
 
         const { edit } = this.state
-
-        return React.Children.toArray(reviews.map(review => {
+    
+        return React.Children.toArray(reviews.map(function(review) {
+            if(videoGame.id === review.video_game.id){
             let today = new Date( Date.now() )
             let oneDay = 1000 * 60 * 60 * 24
             let updated = new Date(review.updated_at)
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
 
-                return (
+                return(
                     <>
                         <Card.Body>
                             {currentUser.id === review.user.id ?
@@ -61,9 +62,17 @@ class Review extends Component {
                         { editToggleButton() }
                         { edit === true ? editReviewForm() : null }
                     </>
-                    
-                );
-
+                )
+            } else {
+                return(
+                    <div>
+                        <Card.Body>
+                            <Card.Title>Be the First to Add a Review</Card.Title>
+                            <Card.Text>Click on the button below</Card.Text>
+                        </Card.Body>
+                    </div>
+                )
+            }
         }))
     }
 
@@ -108,7 +117,6 @@ class Review extends Component {
                 this.setState({created: true})
                 return(<Alert>Review successfully added</Alert>)
             }
-            this.addToggle()
         })
     }
 
@@ -234,7 +242,6 @@ class Review extends Component {
             addReviewForm
         } = this
         
-        const { reviews } = this.props
         const { add } = this.state
 
         return (

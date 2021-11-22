@@ -82,7 +82,7 @@ class Index extends Component {
                                 addReview={addReview}
                                 editReview={editReview}
                                 removeReview={removeReview}
-                                videoGames={videoGames}
+                                videoGame={videoGame}
                                 handleDeleteReview={handleDeleteReview}/>
                             <Card.Body>
                                     <Button varient="primary">Add to Collection</Button>
