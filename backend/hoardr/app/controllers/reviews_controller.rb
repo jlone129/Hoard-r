@@ -22,7 +22,6 @@ class ReviewsController < ApplicationController
         review.user_id = set_user
         review.video_game_id = set_video_game
 
-        
         if review.save
             render json: review, include: [:user, :video_game]
         else

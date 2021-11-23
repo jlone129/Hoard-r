@@ -1,3 +1,5 @@
+require 'pry'
+
 class UserVideoGamesController < ApplicationController
 
     skip_before_action :authorized
@@ -18,15 +20,12 @@ class UserVideoGamesController < ApplicationController
             :video_game => { include: [:system, :genre] }]
     end
 
-    def new
-        @user_video_game = UserVideoGame.new
-
-        render json: @user_video_game
-    end
-
     def create
         @user_video_game = UserVideoGame.create!(user_video_game_params)
-        redirect_to @user_video_game
+        binding.pry
+        render json: @user_video_game, include: 
+            [:user, 
+            :video_game => { include: [:system, :genre] }]
     end
 
     def edit

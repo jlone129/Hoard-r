@@ -10,7 +10,7 @@
 }
 
 #close-button {
-    padding-left: 29rem;
+    padding-left: 32rem;
     position: absolute;
 }
 
@@ -61,7 +61,6 @@ a:active {
 }
 
 .card {
-    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
@@ -72,4 +71,9 @@ a:active {
     border-radius: 0.25rem;
     float: left;
     margin-left: 5rem;
+}
+
+.reviews {
+    position: absolute;
+    padding-top: 65rem;
 }

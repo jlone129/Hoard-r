@@ -21,10 +21,10 @@ class Review extends Component {
     }
 
     getReview = () => {
-        const { 
-            videoGame, 
-            reviews, 
-            currentUser, 
+        const {
+            videoGame,
+            reviews,
+            currentUser,
             handleDeleteReview,
         } = this.props
 
@@ -34,15 +34,15 @@ class Review extends Component {
         } = this
 
         const { edit } = this.state
-    
+
         return React.Children.toArray(reviews.map(function(review) {
-            if(videoGame.id === review.video_game.id){
             let today = new Date( Date.now() )
             let oneDay = 1000 * 60 * 60 * 24
             let updated = new Date(review.updated_at)
             let timeDifference = Math.abs(today - updated)
             let dayDifference = Math.ceil(timeDifference / oneDay)
 
+            if(videoGame.id === review.video_game.id){
                 return(
                     <>
                         <Card.Body>
@@ -59,18 +59,9 @@ class Review extends Component {
                         <Card.Footer>
                             <small className="text-muted">Last Updated: {dayDifference} days ago</small>
                         </Card.Footer>
-                        { editToggleButton() }
-                        { edit === true ? editReviewForm() : null }
+                        { editToggleButton(review.id) }
+                        { edit ? editReviewForm(review.id) : null }
                     </>
-                )
-            } else {
-                return(
-                    <div>
-                        <Card.Body>
-                            <Card.Title>Be the First to Add a Review</Card.Title>
-                            <Card.Text>Click on the button below</Card.Text>
-                        </Card.Body>
-                    </div>
                 )
             }
         }))
@@ -117,17 +108,14 @@ class Review extends Component {
                 this.setState({created: true})
                 return(<Alert>Review successfully added</Alert>)
             }
+            this.addToggle()
         })
     }
 
-    handleEditReview = (e) => {
+    handleEditReview = (id, e) => {
         e.preventDefault()
 
-        let rev;
-
-        this.props.reviews.map(review => rev = review)
-
-        fetch(`http://localhost:3000/reviews/${rev.id}`, {
+        fetch(`http://localhost:3000/reviews/${id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -142,75 +130,74 @@ class Review extends Component {
         .then(res => res.json())
         .then(editedReview => {
             this.props.editReview(editedReview)
-            this.editToggle()
+            this.editToggle(id)
         })
     }
 
-    editReviewForm = () => {
-
+    editReviewForm = (reviewId) => {
         let { reviews } = this.props
         let { handleChange, handleEditReview } = this
 
-        return React.Children.toArray(reviews.map( review =>{
-            return(
-                <Container className="w-100 p-3">
-                    <Form onSubmit={handleEditReview}>
-                        <Form.Group role="form" className="mb-3" id="editReviewForm">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                id="title" 
-                                name="title" 
-                                defaultValue={review.title} 
-                                onChange={handleChange} />
-                            <Form.Label>Description</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                id="description" 
-                                name="description" 
-                                defaultValue={review.description} 
-                                onChange={handleChange} />
-                            <Form.Label>Stars</Form.Label>
-                            <Form.Control 
-                                type="integer" 
-                                id="stars" 
-                                name="stars" 
-                                defaultValue={review.stars} 
-                                onChange={handleChange} />
-                            <Button type="submit">Update Review</Button>
-                        </Form.Group>
-                    </Form>
-                </Container>
-            )
-        }))
+        const review = reviews.filter(el => el.id === reviewId)[0]
+
+        return(
+            <Container className="w-100 p-3">
+                <Form onSubmit={(e) => handleEditReview(reviewId, e)}>
+                    <Form.Group role="form" className="mb-3" id="editReviewForm">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="title"
+                            name="title"
+                            defaultValue={review.title}
+                            onChange={handleChange} />
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="description"
+                            name="description"
+                            defaultValue={review.description}
+                            onChange={handleChange} />
+                        <Form.Label>Stars</Form.Label>
+                        <Form.Control
+                            type="integer"
+                            id="stars"
+                            name="stars"
+                            defaultValue={review.stars}
+                            onChange={handleChange} />
+                        <Button type="submit">Update Review</Button>
+                    </Form.Group>
+                </Form>
+            </Container>
+        )
     }
 
     addReviewForm = () => {
-        
+
         let { handleChange, handleAddReview } = this
         return(
             <Container className="w-100 p-3">
                 <Form onSubmit={handleAddReview}>
                     <Form.Group role="form" className="mb-3" id="addReviewForm">
                         <Form.Label>Title</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            id="title" 
-                            name="title" 
+                        <Form.Control
+                            type="text"
+                            id="title"
+                            name="title"
                             placeholder="Title"
                             onChange={handleChange} />
                         <Form.Label>Description</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            id="description" 
-                            name="description" 
-                            placeholder="Description" 
+                        <Form.Control
+                            type="text"
+                            id="description"
+                            name="description"
+                            placeholder="Description"
                             onChange={handleChange} />
                         <Form.Label>Stars</Form.Label>
-                        <Form.Control 
-                            type="integer" 
-                            id="stars" 
-                            name="stars" 
+                        <Form.Control
+                            type="integer"
+                            id="stars"
+                            name="stars"
                             placeholder="Enter 1 - 5"
                             onChange={handleChange} />
                         <Button type="submit">Add Review</Button>
@@ -220,35 +207,36 @@ class Review extends Component {
         )
     }
 
-    //Allows current user to see the review edit form
-    editToggleButton = () => {
-        
+    editToggleButton = (reviewId) => {
+        // TODO: why is edit toggle always true?
         let { editToggle } = this
+        let { reviews } = this.props
 
-        return React.Children.toArray(this.props.reviews.map(review => {
-            if(review.user.id === this.props.currentUser.id) {
-                return ( <Button onClick={editToggle}>Edit Review</Button> )
-            } else {
-                return( <Button disabled>Edit Review</Button> )
-            }
-        }))
+        const review = reviews.filter(el => el.id === reviewId)[0]
+
+        if(review.user.id === this.props.currentUser.id) {
+            return ( <Button onClick={editToggle}>{ this.state.edit ? 'Cancel Review' : 'Edit Review' }</Button> )
+        } else {
+            return( <Button disabled>Edit Review</Button> )
+        }
     }
 
     render() {
 
-        const { 
-            getReview, 
-            addToggle, 
+        const {
+            getReview,
+            addToggle,
             addReviewForm
         } = this
-        
+
         const { add } = this.state
 
+        // TODO: Swap out review with the edit form when edit is True; Only display a review if it is not being edited currently
         return (
             <>
-                {getReview()}   
-                <Button onClick={addToggle}>Add Review</Button>
-                { add === true ? addReviewForm() : null }
+                {getReview()}
+                { add ? null : <Button onClick={addToggle}>Add Review</Button> }
+                { add === true ? addReviewForm() : null }       
             </>
         )
     }

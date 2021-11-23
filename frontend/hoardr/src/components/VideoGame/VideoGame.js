@@ -21,24 +21,13 @@ class Index extends Component {
     handleAddGame = (e) => {
         e.preventDefault()
 
-        const { videoGame } = this.props
-
-        fetch(`http://localhost:3000/video_games/${videoGame.id}`, {
+        fetch(`http://localhost:3000/user_video_games/`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             },
-            body: JSON.stringify({
-                review: {
-                    "title": e.target[0].value,
-                    "description": e.target[1].value,
-                    "stars": e.target[2].value,
-                    "video_game": this.props.videoGame,
-                    "user": this.props.currentUser,
-                }
-            }),
         })
         .then((res) => res.json())
         .then((newUserGame) => {
@@ -47,7 +36,6 @@ class Index extends Component {
                 this.setState({created: true})
                 return(<Alert>Game successfully added</Alert>)
             }
-            this.addToggle()
         })
 
     }
@@ -63,9 +51,14 @@ class Index extends Component {
             videoGames
         } = this.props
 
+        const {
+            handleAddGame
+        } = this
+
         return(
-            React.Children.toArray(videoGames.map((videoGame) => 
-                <div>
+            React.Children.toArray(videoGames.map((videoGame) => {
+                
+                return <div>
                         <Card style={{ width: '20rem' }}>
                             <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
                             <Card.Body>
@@ -85,11 +78,11 @@ class Index extends Component {
                                 videoGame={videoGame}
                                 handleDeleteReview={handleDeleteReview}/>
                             <Card.Body>
-                                    <Button varient="primary">Add to Collection</Button>
+                                    <Button varient="primary" onClick={handleAddGame}>Add to Collection</Button>
                             </Card.Body>
                         </Card>
                 </div>
-            ))
+            }))
         )
         
     }

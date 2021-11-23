@@ -69,6 +69,9 @@ class Profile extends Component {
                         <div className="birthdate">
                             <h5>DOB: <span>{user.birthdate}</span></h5>
                         </div>
+                        <div id="deleteThis" >
+                            <Button variant="danger" onClick={this.handleRemoveUser}>Delete User</Button>
+                        </div>
                         <div className="video_games">
                             <h1>Owned Games</h1>
                             <Container>
@@ -100,7 +103,7 @@ class Profile extends Component {
                             </Container>
                         </div>
                         <div className="reviews">
-                            <h1>Reviews</h1>
+                            <h1 id="rev-title">Reviews</h1>
                             <Table striped bordered hover size="sm">
                                 <thead>
                                     <tr>
@@ -129,9 +132,6 @@ class Profile extends Component {
                                     </tr>
                                 </tbody>
                             </Table>
-                        </div>
-                        <div id="deleteThis" >
-                            <Button variant="danger" onClick={this.handleRemoveUser}>Delete User</Button>
                         </div>
                     </div>
                 : null}
