@@ -63,7 +63,7 @@ class Review extends Component {
                         { edit ? editReviewForm(review.id) : null }
                     </>
                 )
-            }
+            }            
         }))
     }
 

@@ -18,8 +18,10 @@ class Index extends Component {
         }
     }
 
-    handleAddGame = (e) => {
+    handleAddGame = (videoGame, e) => {
         e.preventDefault()
+
+        console.log(videoGame, "this is video game")
 
         fetch(`http://localhost:3000/user_video_games/`, {
             method: 'POST',
@@ -28,16 +30,19 @@ class Index extends Component {
                 "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             },
+            body: JSON.stringify({
+                "videoGame": videoGame
+            }),
         })
         .then((res) => res.json())
         .then((newUserGame) => {
+            console.log("user videogame: ", newUserGame)
             this.props.addUserGame(newUserGame)
             if(newUserGame.status === "created") {
                 this.setState({created: true})
                 return(<Alert>Game successfully added</Alert>)
             }
         })
-
     }
 
     render() {
@@ -78,7 +83,7 @@ class Index extends Component {
                                 videoGame={videoGame}
                                 handleDeleteReview={handleDeleteReview}/>
                             <Card.Body>
-                                    <Button varient="primary" onClick={handleAddGame}>Add to Collection</Button>
+                                <Button varient="primary" onClick={(e) => handleAddGame(videoGame, e)}>Add to Collection</Button>
                             </Card.Body>
                         </Card>
                 </div>

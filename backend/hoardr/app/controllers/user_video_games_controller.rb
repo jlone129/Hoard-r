@@ -28,20 +28,9 @@ class UserVideoGamesController < ApplicationController
             :video_game => { include: [:system, :genre] }]
     end
 
-    def edit
-        @user_video_game = UserVideoGame.find(params[:id])
-    end
-
-    def update
-        @user_video_game = UserVideoGame.find(params[:id])
-        @user_video_game.update!(user_video_game_params)
-        redirect_to @user_video_game
-    end
-
     def destroy
         @user_video_game = UserVideoGame.find(params[:id])
         @user_video_game.destroy
-        redirect_to user_path
     end
 
     private

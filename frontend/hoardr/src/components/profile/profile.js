@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import Review from '../Review/Review';
 import { Button, 
         Image, 
         Container, 
@@ -42,11 +41,11 @@ class Profile extends Component {
             user, 
             reviews, 
             userVideoGames,
-            videoGames,
-            addReview,
-            editReview,
-            removeReview,
-            handleDeleteReview    
+            // videoGames,
+            // addReview,
+            // editReview,
+            // removeReview,
+            // handleDeleteReview    
         } = this.props
 
         return (
@@ -86,7 +85,7 @@ class Profile extends Component {
                                             <ListGroupItem><b>System:</b> {userVideoGame.video_game.system.name}</ListGroupItem>
                                             <ListGroupItem><b>Genre:</b> {userVideoGame.video_game.genre.name}</ListGroupItem>
                                         </ListGroup>
-                                        <Card.Header><b>Reviews</b></Card.Header>
+                                        {/* <Card.Header><b>Reviews</b></Card.Header>
                                             <Review currentUser={user}
                                             reviews={reviews}
                                             addReview={addReview}
@@ -94,7 +93,7 @@ class Profile extends Component {
                                             removeReview={removeReview}
                                             videoGames={videoGames}
                                             userVideoGame={userVideoGame}
-                                            handleDeleteReview={handleDeleteReview}/>
+                                            handleDeleteReview={handleDeleteReview}/> */}
                                         <Card.Footer>
                                             <Button>Remove Game</Button>
                                         </Card.Footer>
