@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Form, Button, CloseButton, Card, Alert } from 'react-bootstrap';
 import { withRouter } from 'react-router';
+import EditReviewForm from './EditReview';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Review extends Component {
@@ -15,61 +16,8 @@ class Review extends Component {
             video_game: {},
             user: {},
             created: false,
-            edit: false,
             add: false
         }
-    }
-
-    getReview = () => {
-        const {
-            videoGame,
-            reviews,
-            currentUser,
-            handleDeleteReview,
-        } = this.props
-
-        const {
-            editToggleButton,
-            editReviewForm
-        } = this
-
-        const { edit } = this.state
-
-        return React.Children.toArray(reviews.map(function(review) {
-            let today = new Date( Date.now() )
-            let oneDay = 1000 * 60 * 60 * 24
-            let updated = new Date(review.updated_at)
-            let timeDifference = Math.abs(today - updated)
-            let dayDifference = Math.ceil(timeDifference / oneDay)
-
-            if(videoGame.id === review.video_game.id){
-                return(
-                    <>
-                        <Card.Body>
-                            {currentUser.id === review.user.id ?
-                                <CloseButton id="close-button" onClick={handleDeleteReview}/>
-                            :
-                                <CloseButton id="close-button" disabled />
-                            }
-                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
-                            <Card.Title><b>{review.title}</b></Card.Title>
-                            <Card.Text>{review.description}</Card.Text>
-                            <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">Last Updated: {dayDifference} days ago</small>
-                        </Card.Footer>
-                        { editToggleButton(review.id) }
-                        { edit ? editReviewForm(review.id) : null }
-                    </>
-                )
-            }            
-        }))
-    }
-
-    editToggle = () => {
-        let edit = !this.state.edit
-        this.setState({edit})
     }
 
     addToggle = () => {
@@ -130,46 +78,7 @@ class Review extends Component {
         .then(res => res.json())
         .then(editedReview => {
             this.props.editReview(editedReview)
-            this.editToggle(id)
         })
-    }
-
-    editReviewForm = (reviewId) => {
-        let { reviews } = this.props
-        let { handleChange, handleEditReview } = this
-
-        const review = reviews.filter(el => el.id === reviewId)[0]
-
-        return(
-            <Container className="w-100 p-3">
-                <Form onSubmit={(e) => handleEditReview(reviewId, e)}>
-                    <Form.Group role="form" className="mb-3" id="editReviewForm">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control
-                            type="text"
-                            id="title"
-                            name="title"
-                            defaultValue={review.title}
-                            onChange={handleChange} />
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control
-                            type="text"
-                            id="description"
-                            name="description"
-                            defaultValue={review.description}
-                            onChange={handleChange} />
-                        <Form.Label>Stars</Form.Label>
-                        <Form.Control
-                            type="integer"
-                            id="stars"
-                            name="stars"
-                            defaultValue={review.stars}
-                            onChange={handleChange} />
-                        <Button type="submit">Update Review</Button>
-                    </Form.Group>
-                </Form>
-            </Container>
-        )
     }
 
     addReviewForm = () => {
@@ -207,18 +116,54 @@ class Review extends Component {
         )
     }
 
-    editToggleButton = (reviewId) => {
-        // TODO: why is edit toggle always true?
-        let { editToggle } = this
-        let { reviews } = this.props
 
-        const review = reviews.filter(el => el.id === reviewId)[0]
+    getReview = () => {
+        const {
+            videoGame,
+            reviews,
+            currentUser,
+            handleDeleteReview,
+        } = this.props
 
-        if(review.user.id === this.props.currentUser.id) {
-            return ( <Button onClick={editToggle}>{ this.state.edit ? 'Cancel Review' : 'Edit Review' }</Button> )
-        } else {
-            return( <Button disabled>Edit Review</Button> )
-        }
+        let { handleChange, handleEditReview } = this
+
+        return React.Children.toArray(reviews.map(function(review) {
+            let today = new Date( Date.now() )
+            let oneDay = 1000 * 60 * 60 * 24
+            let updated = new Date(review.updated_at)
+            let timeDifference = Math.abs(today - updated)
+            let dayDifference = Math.ceil(timeDifference / oneDay)
+
+            if(videoGame.id === review.video_game.id){
+                return(
+                    <>
+                        <Card.Body>
+                            {currentUser.id === review.user.id ?
+                                <CloseButton id="close-button" onClick={handleDeleteReview}/>
+                            :
+                                <CloseButton id="close-button" disabled />
+                            }
+                            <Card.Text><Card.Img src={review.user.img_url} id="review-pic" /><b>{review.user.username}</b></Card.Text>
+                            <Card.Title><b>{review.title}</b></Card.Title>
+                            <Card.Text>{review.description}</Card.Text>
+                            <Card.Text><b>Stars: </b>{review.stars}</Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <small className="text-muted">Last Updated: {dayDifference} days ago</small>
+                        </Card.Footer>
+                        {currentUser.id === review.user.id ?
+                            <EditReviewForm
+                                handleChange={handleChange}
+                                handleEditReview={handleEditReview}
+                                review={review}
+                            />
+                        : null }
+                    </>
+                )
+            } else {
+                return null
+            }
+        }))
     }
 
     render() {
@@ -236,7 +181,7 @@ class Review extends Component {
             <>
                 {getReview()}
                 { add ? null : <Button onClick={addToggle}>Add Review</Button> }
-                { add === true ? addReviewForm() : null }       
+                { add === true ? addReviewForm() : null }
             </>
         )
     }
