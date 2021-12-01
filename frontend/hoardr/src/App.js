@@ -194,7 +194,13 @@ class App extends Component {
   }
 
   addUserGame = (newUserGame) =>{
-    this.setState({userVideoGames: [...this.state.userVideoGames, newUserGame]})
+    this.setState({userVideoGames: [...this.state.userVideoGames, newUserGame] })
+  }
+
+  removeUserGame = (delUserGame) => {
+    this.setState({
+      userVideoGames: this.state.userVideoGames.filter((userVideoGame) => userVideoGame.id !== delUserGame.id)
+    })
   }
 
   render() {
@@ -210,7 +216,8 @@ class App extends Component {
       removeUser,
       handleLogout,
       handleDeleteReview,
-      addUserGame
+      addUserGame,
+      removeUserGame
     } = this;
 
     const { 
@@ -333,6 +340,7 @@ class App extends Component {
                 handleDeleteReview={handleDeleteReview}
                 removeReview={removeReview}
                 logout={handleLogout}
+                removeUserGame={removeUserGame}
               />
             </Route>
             <Route exact path="/user_video_game">

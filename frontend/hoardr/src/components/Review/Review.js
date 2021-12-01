@@ -77,7 +77,7 @@ class Review extends Component {
         })
         .then(res => res.json())
         .then(editedReview => {
-            this.props.editReview(editedReview)
+            this.props.editReview(editedReview) 
         })
     }
 

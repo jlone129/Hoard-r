@@ -19,21 +19,36 @@ class Profile extends Component {
     }
 
 
-  handleRemoveUser = () => {
-    fetch(`http://localhost:3000/users/${this.props.user.id}`, {
-        method: 'DELETE',
-        headers: {
-            "Authorization": `Bearer ${localStorage.token}`
-        }
-    })
-    .then(res => res.json())
-    .then(() => {
-        this.props.removeUser(this.props.user)
-        alert("User Successfully Deleted")
-        this.props.history.push("/")
-        this.props.handleLogout()
-    })
-  }
+    handleRemoveUser = () => {
+        fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(res => res.json())
+        .then(() => {
+            this.props.removeUser(this.props.user)
+            alert("User Successfully Deleted")
+            this.props.history.push("/")
+            this.props.handleLogout()
+        })
+    }
+    
+    handleRemoveGame = (userVideoGame) => {
+
+        fetch(`http://localhost:3000/user_video_games/${userVideoGame.id}`,  {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(res => res.json())
+        .then(() => {
+            this.props.removeUserGame(userVideoGame)
+            alert("Game Successfully Deleted")
+        })
+    }
 
     render() {
         
@@ -47,6 +62,10 @@ class Profile extends Component {
             // removeReview,
             // handleDeleteReview    
         } = this.props
+
+        const {
+            handleRemoveGame
+        } = this
 
         return (
             <div className="profile-page">
@@ -71,67 +90,62 @@ class Profile extends Component {
                         <div id="deleteThis" >
                             <Button variant="danger" onClick={this.handleRemoveUser}>Delete User</Button>
                         </div>
-                        <div className="video_games">
-                            <h1>Owned Games</h1>
-                            <Container>
-                                {React.Children.toArray(userVideoGames.map((userVideoGame) => (
-                                    <Card style={{ width: '18rem' }}>
-                                        <Card.Img variant="top" src={userVideoGame.video_game.img_url} alt={userVideoGame.title} />
-                                        <Card.Body>
-                                            <Card.Title>{userVideoGame.video_game.title}</Card.Title>
-                                            <Card.Text>{userVideoGame.video_game.description}</Card.Text>
-                                        </Card.Body>
-                                        <ListGroup className="list-group-flush">
-                                            <ListGroupItem><b>System:</b> {userVideoGame.video_game.system.name}</ListGroupItem>
-                                            <ListGroupItem><b>Genre:</b> {userVideoGame.video_game.genre.name}</ListGroupItem>
-                                        </ListGroup>
-                                        {/* <Card.Header><b>Reviews</b></Card.Header>
-                                            <Review currentUser={user}
-                                            reviews={reviews}
-                                            addReview={addReview}
-                                            editReview={editReview}
-                                            removeReview={removeReview}
-                                            videoGames={videoGames}
-                                            userVideoGame={userVideoGame}
-                                            handleDeleteReview={handleDeleteReview}/> */}
-                                        <Card.Footer>
-                                            <Button>Remove Game</Button>
-                                        </Card.Footer>
-                                    </Card>
-                                )))}
-                            </Container>
-                        </div>
-                        <div className="reviews">
-                            <h1 id="rev-title">Reviews</h1>
-                            <Table striped bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>Reviewer</th>
-                                        <th>Video Game</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Stars</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {React.Children.toArray(reviews.map((review) => (
-                                            review.user.id === user.id &&
-                                                reviews.map(function (review) { 
-                                                    return ([
-                                                        <td>{user.username}</td>,
-                                                        <>{console.log(review.video_game.title)}</>,
-                                                        <td>{review.video_game.title}</td>,
-                                                        <td>{review.title}</td>,
-                                                        <td>{review.description}</td>,
-                                                        <td>{review.stars}</td>
-                                                    ])
-                                                })
-                                        )))}
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </div>
+                        <h1>Owned Games</h1>
+                        <Container>
+                            {React.Children.toArray(userVideoGames.map((userVideoGame) => (
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Img variant="top" src={userVideoGame.video_game.img_url} alt={userVideoGame.title} />
+                                    <Card.Body>
+                                        <Card.Title>{userVideoGame.video_game.title}</Card.Title>
+                                        <Card.Text>{userVideoGame.video_game.description}</Card.Text>
+                                    </Card.Body>
+                                    <ListGroup className="list-group-flush">
+                                        <ListGroupItem><b>System:</b> {userVideoGame.video_game.system.name}</ListGroupItem>
+                                        <ListGroupItem><b>Genre:</b> {userVideoGame.video_game.genre.name}</ListGroupItem>
+                                    </ListGroup>
+                                    {/* <Card.Header><b>Reviews</b></Card.Header>
+                                        <Review currentUser={user}
+                                        reviews={reviews}
+                                        addReview={addReview}
+                                        editReview={editReview}
+                                        removeReview={removeReview}
+                                        videoGames={videoGames}
+                                        userVideoGame={userVideoGame}
+                                        handleDeleteReview={handleDeleteReview}/> */}
+                                    <Card.Footer>
+                                        <Button onClick={() => handleRemoveGame(userVideoGame)}>Remove Game</Button>
+                                    </Card.Footer>
+                                </Card>
+                            )))}
+                        </Container>
+                        <h1 id="rev-title">Reviews</h1>
+                        <Table striped bordered hover size="sm">
+                            <thead>
+                                <tr>
+                                    <th>Reviewer</th>
+                                    <th>Video Game</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Stars</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {React.Children.toArray(reviews.map((review) => (
+                                        review.user.id === user.id &&
+                                            reviews.map(function (review) { 
+                                                return ([
+                                                    <td>{user.username}</td>,
+                                                    <td>{review.video_game.title}</td>,
+                                                    <td>{review.title}</td>,
+                                                    <td>{review.description}</td>,
+                                                    <td>{review.stars}</td>
+                                                ])
+                                            })
+                                    )))}
+                                </tr>
+                            </tbody>
+                        </Table>
                     </div>
                 : null}
             </div>

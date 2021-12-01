@@ -3,8 +3,7 @@ import {
     Card, 
     ListGroup, 
     ListGroupItem, 
-    Button, 
-    Alert
+    Button
 } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Review from '../Review/Review';
@@ -18,10 +17,8 @@ class Index extends Component {
         }
     }
 
-    handleAddGame = (videoGame, e) => {
+    handleAddGame = (videoGame, currentUser, e) => {
         e.preventDefault()
-
-        console.log(videoGame, "this is video game")
 
         fetch(`http://localhost:3000/user_video_games/`, {
             method: 'POST',
@@ -31,18 +28,13 @@ class Index extends Component {
                 "Authorization": `Bearer ${localStorage.token}`
             },
             body: JSON.stringify({
-                "videoGame": videoGame
+                user_video_game: {
+                    "videoGame": videoGame,
+                    "user": currentUser
+                }
             }),
         })
         .then((res) => res.json())
-        .then((newUserGame) => {
-            console.log("user videogame: ", newUserGame)
-            this.props.addUserGame(newUserGame)
-            if(newUserGame.status === "created") {
-                this.setState({created: true})
-                return(<Alert>Game successfully added</Alert>)
-            }
-        })
     }
 
     render() {
@@ -83,7 +75,9 @@ class Index extends Component {
                                 videoGame={videoGame}
                                 handleDeleteReview={handleDeleteReview}/>
                             <Card.Body>
-                                <Button varient="primary" onClick={(e) => handleAddGame(videoGame, e)}>Add to Collection</Button>
+                                <Button varient="primary" onClick={(e) => handleAddGame(videoGame, currentUser, e)}>
+                                    Add to Collection
+                                </Button>
                             </Card.Body>
                         </Card>
                 </div>
