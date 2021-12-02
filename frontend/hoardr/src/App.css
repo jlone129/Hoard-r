@@ -61,8 +61,6 @@ a:active {
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
     background-color: #fff;
@@ -73,7 +71,70 @@ a:active {
     margin-left: 5rem;
 }
 
+.card-img-top {
+    height: 350px;
+}
+
+#click-enter {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+#home-title {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+#homepage-img {
+    animation-name: spin;
+    animation-duration: 15000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
+    outline-color: crimson;
+    outline-width: 2rem;
+    outline-style: outset;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+    width: 40rem;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+#user-video-game-title {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#user-reviews {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 .reviews {
     position: absolute;
     padding-top: 65rem;
+}
+
+#profile-title {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#video-game-cards {
+    float: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }

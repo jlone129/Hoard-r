@@ -176,7 +176,6 @@ class Review extends Component {
 
         const { add } = this.state
 
-        // TODO: Swap out review with the edit form when edit is True; Only display a review if it is not being edited currently
         return (
             <>
                 {getReview()}

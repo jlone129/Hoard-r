@@ -29,12 +29,15 @@ class Index extends Component {
             },
             body: JSON.stringify({
                 user_video_game: {
-                    "videoGame": videoGame,
+                    "videoGame": videoGame, 
                     "user": currentUser
                 }
             }),
         })
         .then((res) => res.json())
+        .then(() => {
+            return alert("Game Successfully Added")
+        })
     }
 
     render() {
