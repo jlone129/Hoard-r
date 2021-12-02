@@ -133,8 +133,21 @@ a:active {
     text-align: center;
 }
 
+#video-game {
+    margin-bottom: 2rem;
+    outline-color: gray;
+    outline-width: 4px;
+    outline-style: outset;
+}
+
 #video-game-cards {
     float: left;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+#video-game-title {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    text-align: center;
 }

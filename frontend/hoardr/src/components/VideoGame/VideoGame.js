@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { 
+    Button,
     Card, 
+    Container,
     ListGroup, 
     ListGroupItem, 
-    Button
 } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Review from '../Review/Review';
@@ -56,10 +57,10 @@ class Index extends Component {
         } = this
 
         return(
-            React.Children.toArray(videoGames.map((videoGame) => {
-                
-                return <div>
-                        <Card style={{ width: '20rem' }}>
+            <Container>
+                <h1 id="video-game-title">Video Games</h1>
+                    {React.Children.toArray(videoGames.map((videoGame) => { 
+                        return <Card id="video-game" style={{ width: '20rem' }}>
                             <Card.Img variant="top" src={videoGame.img_url} alt={videoGame.title} />
                             <Card.Body>
                                 <Card.Title>{videoGame.title}</Card.Title>
@@ -83,8 +84,8 @@ class Index extends Component {
                                 </Button>
                             </Card.Body>
                         </Card>
-                </div>
-            }))
+                    }))}
+            </Container>
         )
         
     }

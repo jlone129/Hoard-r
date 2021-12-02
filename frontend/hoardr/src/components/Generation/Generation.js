@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Table } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 
 class Generation extends Component {
@@ -9,7 +10,7 @@ class Generation extends Component {
       <div>
         <h1>Generations Page</h1>
         <div className="gen-table">
-          <table>
+          <Table striped bordered hover size="sm">
             <thead>
               <tr>
                 <th>Image</th>
@@ -28,7 +29,7 @@ class Generation extends Component {
                 <td>{gen.description}</td>
               </tr>
             </tbody>
-          </table>
+          </Table>
         </div>
       </div>
     )
