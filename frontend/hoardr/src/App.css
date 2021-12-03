@@ -1,12 +1,17 @@
-.profile-pic {
-    width: 300px;
-    height: 300px;
+#profile-pic {
+    width: 250px;
+    height: 250px;
 }
 
 #review-pic {
     height: 20%;
     width: 20%;
     margin-right: 10px;
+}
+
+#thumbnail-pic {
+    height: 240px;
+    width: 427px;
 }
 
 #close-button {
@@ -109,6 +114,10 @@ a:active {
     to {
         transform:rotate(360deg);
     }
+}
+
+#body-content {
+    text-align: center;
 }
 
 #user-video-game-title {

@@ -1,37 +1,30 @@
 import React, { Component } from 'react'
-import { Table } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 
 class Generation extends Component {
 
   render() {
-    const { gen } = this.props
+    const { generations } = this.props
     return (
-      <div>
+      <Container>
         <h1>Generations Page</h1>
-        <div className="gen-table">
-          <Table striped bordered hover size="sm">
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Generation</th>
-                <th>Start Year</th>
-                <th>End Year</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><img src={gen.img_url} alt={gen.name}/></td>
-                <td>{gen.name}</td>
-                <td>{gen.start_date}</td>
-                <td>{gen.end_date}</td>
-                <td>{gen.description}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </div>
-      </div>
+          {React.Children.toArray(generations.map((gen) => {
+            return <Card style={{display: 'flex', flexDirection: 'row', flex: 1}}>
+              <Card.Header>
+                <Card.Img src={gen.img_url} alt={gen.name} id="thumbnail-pic" />
+              </Card.Header>
+              <Card.Body id="body-content">
+                <Card.Title>{gen.name}</Card.Title>
+                <Card.Text>{gen.description}</Card.Text>
+                <Card.Text><b>Start Date:</b></Card.Text>
+                <Card.Text>{gen.start_date}</Card.Text>
+                <Card.Text><b>End Date:</b></Card.Text>
+                <Card.Text>{gen.end_date}</Card.Text>
+              </Card.Body>
+            </Card>
+          }))}
+      </Container>
     )
   }
 }

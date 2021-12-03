@@ -224,7 +224,11 @@ class App extends Component {
       reviews, 
       videoGames, 
       currentUser, 
-      userVideoGames 
+      userVideoGames,
+      genres,
+      systems,
+      generations,
+      subgenres
     } = this.state;
 
     return (
@@ -239,9 +243,9 @@ class App extends Component {
                     Video Games
                   </NavDropdown.Item>
                   <NavDropdown.Item href="/genre">Genres</NavDropdown.Item>
-                  <NavDropdown.Item href="/subgenre">
+                  {/* <NavDropdown.Item href="/subgenre">
                     Subgenres
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> */}
                 </NavDropdown>
                 <NavDropdown title="System" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="/generation">
@@ -309,24 +313,16 @@ class App extends Component {
                 />
             </Route>
             <Route exact path="/system">
-              {React.Children.toArray(this.state.systems.map((system) => (
-                <System system={system} />
-              )))}
+                <System systems={systems}/>
             </Route>
             <Route exact path="/generation">
-              {React.Children.toArray(this.state.generations.map((gen) => (
-                <Generation gen={gen} />
-              )))}
+                <Generation generations={generations} />
             </Route>
             <Route exact path="/genre">
-              {React.Children.toArray(this.state.genres.map((genre) => (
-                <Genre genre={genre} />
-              )))}
+                <Genre genres={genres} />
             </Route>
             <Route exact path="/subgenre">
-              {React.Children.toArray(this.state.subgenres.map((subgenre) => (
-                <Subgenre subgenre={subgenre} />
-              )))}
+                <Subgenre subgenres={subgenres} />
             </Route>
             <Route exact path="/profile">
               <Profile

@@ -71,18 +71,19 @@ class Profile extends Component {
                             <Col><h1 id="profile-title">{user.username} Profile</h1></Col>
                         </Row>
                         <Row>
+                            <Col />
                             <Col>
-                                <Card style={{display: 'flex', flexDirection: 'row', flex: 1, marginLeft: '16rem', width: '27rem'}}>
+                                <Card style={{display: 'flex', flexDirection: 'row', flex: 1}}>
                                     {user.img_url?
-                                        <Card.Img src={user.img_url} alt={user.name} thumbnail />
+                                        <Card.Img src={user.img_url} alt={user.name} id="profile-pic" />
                                         :
                                         <Card.Img src="https://static-cdn.jtvnw.net/jtv_user_pictures/5669fc87-38f8-48cd-9a9a-7fc1544b75e8-profile_image-300x300.png" alt="Default Picture" thumbnail />
                                     }
-                                    <Card.Body>
+                                    <Card.Body id="profile-body">
                                         <Card.Title>{user.username}</Card.Title>
                                         <ListGroup className="list-group-flush">
-                                            <ListGroupItem>Email: <span>{user.email}</span></ListGroupItem>
-                                            <ListGroupItem>DOB: <span>{user.birthdate}</span></ListGroupItem>
+                                            <ListGroupItem><b>Email:</b> <span>{user.email}</span></ListGroupItem>
+                                            <ListGroupItem><b>DOB:</b> <span>{user.birthdate}</span></ListGroupItem>
                                         </ListGroup>
                                         <Card.Footer>
                                             <Button variant="danger" onClick={this.handleRemoveUser}>Delete User</Button>
@@ -90,6 +91,7 @@ class Profile extends Component {
                                     </Card.Body>
                                 </Card> 
                             </Col>
+                            <Col />
                         </Row>
                         <Row> 
                             <Col><h3 id="user-video-game-title">{user.username}'s Games</h3></Col>
