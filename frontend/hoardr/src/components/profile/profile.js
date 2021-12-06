@@ -66,7 +66,7 @@ class Profile extends Component {
         return (
             <div>
                 {user?
-                    <Container>
+                    <Container id="card-container">
                         <Row>
                             <Col><h1 id="profile-title">{user.username} Profile</h1></Col>
                         </Row>

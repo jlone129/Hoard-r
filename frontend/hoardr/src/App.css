@@ -178,6 +178,8 @@ body {
     background-size: 270rem;
 }
 
-#example {
-    
+#card-container {
+    background-color: rgba(214, 214, 214, 0.459);
+    height: 100rem;
+    padding-top: 20px;
 }

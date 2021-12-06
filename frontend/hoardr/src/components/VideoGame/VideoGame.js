@@ -57,7 +57,7 @@ class Index extends Component {
         } = this
 
         return(
-            <Container>
+            <Container id="card-container">
                 <h1 id="video-game-title">Video Games</h1>
                     {React.Children.toArray(videoGames.map((videoGame) => { 
                         return <Card id="video-game" style={{ width: '20rem' }}>

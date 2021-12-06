@@ -272,9 +272,9 @@ class App extends Component {
                   {currentUser && (
                     <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   )}
-                  {currentUser && (
+                  {/* {currentUser && (
                     <NavDropdown.Item href="/user_video_game">My Games</NavDropdown.Item>
-                  )}
+                  )} */}
                   {currentUser ? (
                     <NavDropdown.Item href="/update">
                       Update User
