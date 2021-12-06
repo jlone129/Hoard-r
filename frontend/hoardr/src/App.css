@@ -160,3 +160,24 @@ a:active {
     margin-top: 2rem;
     text-align: center;
 }
+
+#card-hover-zoom {
+    margin: 1rem;
+    overflow: hidden;
+    transition: transform .5s ease;
+}
+
+#card-hover-zoom:hover {
+    transform: scale(1.2);
+}
+
+body {
+    background-image: url("https://images7.alphacoders.com/333/333217.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 270rem;
+}
+
+#example {
+    
+}

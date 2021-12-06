@@ -7,10 +7,11 @@ class Generation extends Component {
   render() {
     const { generations } = this.props
     return (
-      <Container>
-        <h1>Generations Page</h1>
+      <Container id="background-opac-50">
+        <div id="example">
+        <h1 id="profile-title">Generations Page</h1>
           {React.Children.toArray(generations.map((gen) => {
-            return <Card style={{display: 'flex', flexDirection: 'row', flex: 1}}>
+            return <Card id="card-hover-zoom" style={{display: 'flex', flexDirection: 'row', flex: 1, width: '40rem'}}>
               <Card.Header>
                 <Card.Img src={gen.img_url} alt={gen.name} id="thumbnail-pic" />
               </Card.Header>
@@ -24,6 +25,7 @@ class Generation extends Component {
               </Card.Body>
             </Card>
           }))}
+      </div>
       </Container>
     )
   }

@@ -8,9 +8,9 @@ class Genre extends Component {
     const { genres } = this.props
     return (
       <Container>
-        <h1>Genres Page</h1>
+        <h1 id="profile-title">Genres Page</h1>
         {React.Children.toArray(genres.map((genre) => (
-          <Card style={{display: 'flex', flexDirection: 'row', flex: 1}}>
+          <Card id="card-hover-zoom" style={{display: 'flex', flexDirection: 'row', flex: 1, width: '40rem'}}>
             <Card.Header>
               <Card.Img src={genre.img_url} alt={genre.name} id="thumbnail-pic" />
             </Card.Header>

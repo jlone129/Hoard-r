@@ -8,9 +8,9 @@ class System extends Component {
         const { systems } = this.props
         return (
             <Container>
-                <h1>Systems Page</h1>
+                <h1 id="profile-title">Systems Page</h1>
                 {React.Children.toArray(systems.map((system) => (
-                    <Card style={{display: 'flex', flexDirection: 'row', flex: 1}}>
+                    <Card id="card-hover-zoom" style={{display: 'flex', flexDirection: 'row', flex: 1, width: '40rem'}}>
                         <Card.Header>
                             <Card.Img src={system.img_url} alt={system.name} id="thumbnail-pic" />
                         </Card.Header>
